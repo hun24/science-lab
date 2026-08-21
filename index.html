@@ -520,21 +520,34 @@
             feather.position.set(-8, 19, 1);
             scene.add(feather);
 
+            // 궤적(자취) 표시용 그룹
+            const trajGroup = new THREE.Group();
+            scene.add(trajGroup);
+
             active3DObjects = {
-                ball, feather,
+                ball, feather, trajGroup,
+                showTrajectory: true,
                 isVacuum: false,
                 vx1: 0,
                 vx2: 0,
                 status: 'stopped',
                 t: 0,
-                history: []
+                history: [],
+                lastTrajT: -1
             };
 
             ctrl.innerHTML = `
-                <button id="btnGraphToggleSwitch" onclick="toggleGraphVisibility()" class="${isGraphVisible ? 'w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 border border-indigo-500' : 'w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs rounded-xl flex items-center justify-center gap-2 border border-slate-700'}">
-                    <i class="fa-solid ${isGraphVisible ? 'fa-chart-line' : 'fa-eye-slash'}"></i>
-                    <span>${isGraphVisible ? '실시간 그래프 ON (표시 중)' : '실시간 그래프 OFF (숨김)'}</span>
-                </button>
+                <div class="grid grid-cols-2 gap-2">
+                    <button id="btnGraphToggleSwitch" onclick="toggleGraphVisibility()" class="${isGraphVisible ? 'w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-indigo-500' : 'w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-slate-700'}">
+                        <i class="fa-solid ${isGraphVisible ? 'fa-chart-line' : 'fa-eye-slash'}"></i>
+                        <span>그래프 ${isGraphVisible ? 'ON' : 'OFF'}</span>
+                    </button>
+
+                    <button id="btnTrajToggleSwitch" class="w-full py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-blue-500">
+                        <i class="fa-solid fa-route"></i>
+                        <span>운동 자취 ON</span>
+                    </button>
+                </div>
 
                 <button id="btnVac3D" class="w-full py-2.5 bg-slate-800 text-slate-300 font-bold text-xs rounded-xl border border-slate-700 flex items-center justify-center gap-2">
                     <i class="fa-solid fa-wind"></i> <span>공기중 (공기 저항 존재)</span>
@@ -567,10 +580,24 @@
             const btnVac = document.getElementById('btnVac3D');
             const btnToggle = document.getElementById('btnDropToggle');
             const btnReset = document.getElementById('btnDropReset');
+            const btnTraj = document.getElementById('btnTrajToggleSwitch');
             const vxRange1 = document.getElementById('vxRange13D');
             const vxVal1Text = document.getElementById('vxVal13D');
             const vxRange2 = document.getElementById('vxRange23D');
             const vxVal2Text = document.getElementById('vxVal23D');
+
+            btnTraj.onclick = function() {
+                active3DObjects.showTrajectory = !active3DObjects.showTrajectory;
+                trajGroup.visible = active3DObjects.showTrajectory;
+                
+                if (active3DObjects.showTrajectory) {
+                    this.className = "w-full py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-blue-500";
+                    this.innerHTML = `<i class="fa-solid fa-route"></i> <span>운동 자취 ON</span>`;
+                } else {
+                    this.className = "w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-400 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-slate-700";
+                    this.innerHTML = `<i class="fa-solid fa-eye-slash"></i> <span>운동 자취 OFF</span>`;
+                }
+            };
 
             btnVac.onclick = function() {
                 active3DObjects.isVacuum = !active3DObjects.isVacuum;
@@ -607,7 +634,17 @@
             btnReset.onclick = () => {
                 active3DObjects.status = 'stopped';
                 active3DObjects.t = 0;
+                active3DObjects.lastTrajT = -1;
                 active3DObjects.history = [];
+                
+                // 자취 점 잔상 제거
+                while (trajGroup.children.length > 0) {
+                    const obj = trajGroup.children[0];
+                    if (obj.geometry) obj.geometry.dispose();
+                    if (obj.material) obj.material.dispose();
+                    trajGroup.remove(obj);
+                }
+
                 ball.position.set(-8, 19, 0);
                 feather.position.set(-8, 19, 1);
 
@@ -713,6 +750,27 @@
 
                     if (realHeightBall > 0) ball.position.x = xPosBall;
                     if (realHeightFeather > 0) feather.position.x = xPosFeather;
+
+                    // 일정 시간 간격(0.1초 마다) 자취 점 찍기
+                    if (active3DObjects.t - active3DObjects.lastTrajT >= 0.1) {
+                        active3DObjects.lastTrajT = active3DObjects.t;
+
+                        if (realHeightBall > 0) {
+                            const pGeo = new THREE.SphereGeometry(0.12, 8, 8);
+                            const pMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+                            const dot = new THREE.Mesh(pGeo, pMat);
+                            dot.position.copy(ball.position);
+                            trajGroup.add(dot);
+                        }
+
+                        if (realHeightFeather > 0) {
+                            const pGeo = new THREE.SphereGeometry(0.12, 8, 8);
+                            const pMat = new THREE.MeshBasicMaterial({ color: 0xf43f5e });
+                            const dot = new THREE.Mesh(pGeo, pMat);
+                            dot.position.copy(feather.position);
+                            trajGroup.add(dot);
+                        }
+                    }
 
                     active3DObjects.history.push({
                         t: active3DObjects.t,
