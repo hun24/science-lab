@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>교과서 속 가상 과학 실험실</title>
+    <title>교과서 속 가상 과학 실험실 Pro 3D</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome CDN -->
@@ -18,102 +18,103 @@
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         body {
             font-family: 'Pretendard', sans-serif;
-            background-color: #080c14;
+            background-color: #030712;
             color: #f8fafc;
             user-select: none;
             overflow: hidden;
             -webkit-tap-highlight-color: transparent;
         }
         .lab-card {
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .lab-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 28px -6px rgba(59, 130, 246, 0.4);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 20px 30px -10px rgba(59, 130, 246, 0.35);
         }
         .selected-card {
             border-color: #3b82f6 !important;
-            background-color: rgba(30, 58, 138, 0.4) !important;
-            box-shadow: 0 0 24px rgba(59, 130, 246, 0.5) !important;
+            background-color: rgba(30, 58, 138, 0.45) !important;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5) !important;
         }
-        /* Glassmorphism Panel UI */
+        /* High-End Glassmorphism Panel UI */
         .glass-panel {
-            background: rgba(15, 23, 42, 0.88);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
         }
-        /* Touch and Gesture Canvas Handling */
         canvas {
             outline: none;
-            touch-action: none; /* Prevents unwanted scrolling during 3D touch operations */
+            touch-action: none;
         }
-        /* Touch Friendly Range Sliders */
         input[type=range] {
             -webkit-appearance: none;
             appearance: none;
-            height: 10px;
-            border-radius: 5px;
+            height: 8px;
+            border-radius: 4px;
             background: #1e293b;
             outline: none;
         }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             background: #3b82f6;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.8);
             border: 2px solid #ffffff;
         }
-        input[type=range]::-moz-range-thumb {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: #3b82f6;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
-            border: 2px solid #ffffff;
-        }
-        /* Smooth Scrollbar for Mobile Control Panel */
         .custom-scrollbar::-webkit-scrollbar {
-            width: 5px;
+            width: 6px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.4);
-            border-radius: 8px;
+            background: rgba(15, 23, 42, 0.5);
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: rgba(51, 65, 85, 0.8);
-            border-radius: 8px;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body class="h-screen w-screen flex flex-col">
 
     <!-- Header Navigation -->
-    <header class="border-b border-slate-800/80 bg-slate-900/95 backdrop-blur z-50 shrink-0">
-        <div class="max-w-7xl mx-auto px-3 md:px-4 py-2.5 md:py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2.5 md:space-x-3 cursor-pointer" onclick="goHome()">
-                <div class="bg-gradient-to-tr from-blue-600 via-teal-500 to-indigo-500 p-2 md:p-2.5 rounded-xl text-white shadow-lg shadow-blue-500/25 shrink-0">
-                    <i class="fa-solid fa-flask-vial text-base md:text-xl"></i>
+    <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur z-50 shrink-0">
+        <div class="max-w-7xl mx-auto px-3 md:px-5 py-2.5 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="goHome()">
+                <div class="bg-gradient-to-tr from-blue-600 via-indigo-500 to-cyan-400 p-2 md:p-2.5 rounded-xl text-white shadow-lg shadow-blue-500/30 shrink-0">
+                    <i class="fa-solid fa-flask-vial text-lg md:text-xl"></i>
                 </div>
                 <div>
-                    <h1 class="text-base md:text-xl font-extrabold bg-gradient-to-r from-blue-400 via-teal-300 to-indigo-300 bg-clip-text text-transparent">
-                        교과서 속 가상 과학 실험실
-                    </h1>
-                    <p class="hidden sm:block text-[11px] text-slate-400">Virtual Science Laboratory for Textbook Experiments</p>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-base md:text-xl font-extrabold bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-300 bg-clip-text text-transparent">
+                            교과서 속 가상 과학 실험실
+                        </h1>
+                        <span class="bg-blue-900/60 text-blue-300 text-[10px] font-black px-1.5 py-0.5 rounded border border-blue-700/50 uppercase tracking-widest">3D Real Studio</span>
+                    </div>
+                    <p class="hidden sm:block text-[11px] text-slate-400">Interactive 3D Photorealistic Science Physics & Chemistry Simulator</p>
                 </div>
             </div>
             
             <div id="navControls" class="hidden flex items-center gap-2 md:gap-3">
-                <span class="hidden md:flex bg-emerald-950/80 text-emerald-400 px-3 py-1.5 rounded-lg border border-emerald-800/60 text-xs font-bold items-center gap-1.5">
-                    <i class="fa-solid fa-vr-cardboard text-emerald-400"></i> 3D 실사 모드
-                </span>
-                <button onclick="goHome()" class="px-2.5 py-1.5 md:px-3.5 md:py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium rounded-lg text-xs transition border border-slate-700 flex items-center gap-1.5">
-                    <i class="fa-solid fa-list"></i> <span class="hidden sm:inline">실험 목록으로</span><span class="sm:hidden">목록</span>
+                <!-- Camera View Presets -->
+                <div class="hidden lg:flex bg-slate-900 border border-slate-800 rounded-lg p-1 gap-1 text-xs">
+                    <button onclick="setCameraPreset('overview')" class="px-2.5 py-1 text-slate-300 hover:text-white hover:bg-slate-800 rounded transition flex items-center gap-1">
+                        <i class="fa-solid fa-video text-blue-400"></i> 전체보기
+                    </button>
+                    <button onclick="setCameraPreset('focus')" class="px-2.5 py-1 text-slate-300 hover:text-white hover:bg-slate-800 rounded transition flex items-center gap-1">
+                        <i class="fa-solid fa-magnifying-glass text-cyan-400"></i> 근접관찰
+                    </button>
+                    <button onclick="setCameraPreset('top')" class="px-2.5 py-1 text-slate-300 hover:text-white hover:bg-slate-800 rounded transition flex items-center gap-1">
+                        <i class="fa-solid fa-arrows-up-to-line text-emerald-400"></i> 탑뷰
+                    </button>
+                </div>
+
+                <button onclick="goHome()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium rounded-lg text-xs transition border border-slate-700 flex items-center gap-1.5 shadow">
+                    <i class="fa-solid fa-list"></i> <span class="hidden sm:inline">실험 목록</span>
                 </button>
             </div>
         </div>
@@ -125,84 +126,101 @@
         <!-- SCREEN 1: Experiment Selection Center -->
         <section id="selectionScreen" class="w-full max-w-7xl mx-auto p-4 md:p-6 flex flex-col justify-between overflow-y-auto custom-scrollbar">
             <div>
-                <div class="text-center max-w-2xl mx-auto mb-6 md:mb-8 mt-1 md:mt-2">
-                    <span class="text-blue-400 font-semibold text-[11px] md:text-xs tracking-widest uppercase bg-blue-950/80 px-3 py-1 rounded-full border border-blue-800/60">
-                        교과서 핵심 실험 탐구
+                <div class="text-center max-w-2xl mx-auto mb-6 md:mb-8 mt-2">
+                    <span class="text-cyan-400 font-bold text-xs tracking-widest uppercase bg-cyan-950/80 px-3.5 py-1 rounded-full border border-cyan-800/60 shadow-lg">
+                        <i class="fa-solid fa-cube mr-1"></i> 고품질 3D 물리/화학/지구과학 탐구
                     </span>
-                    <h2 class="text-2xl md:text-4xl font-extrabold mt-2.5 text-white">원하는 실험을 선택하세요</h2>
-                    <p class="text-slate-400 text-xs md:text-sm mt-1.5 md:mt-2">PC와 모바일 어디서나 3D 가상 실험실에서 실제 도구와 변수를 직접 조작해보세요.</p>
+                    <h2 class="text-2xl md:text-4xl font-black mt-3 text-white tracking-tight">원하는 가상 실험실을 선택하세요</h2>
+                    <p class="text-slate-400 text-xs md:text-sm mt-2 leading-relaxed">
+                        실제 물리 법칙과 화학 반응이 실시간 3D 조명과 파티클로 구현되는 교과서 과학 시뮬레이터입니다.
+                    </p>
                 </div>
 
                 <!-- Experiment Cards Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 md:gap-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
                     
                     <!-- Lab 1 -->
-                    <div class="lab-card bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:p-5 cursor-pointer relative" onclick="selectExperiment(1, this)">
-                        <div class="w-10 h-10 md:w-11 md:h-11 bg-indigo-500/10 text-indigo-400 rounded-xl flex items-center justify-center text-lg md:text-xl mb-2.5 md:mb-3 border border-indigo-500/20">
+                    <div class="lab-card bg-slate-900/90 border border-slate-800 rounded-2xl p-5 cursor-pointer relative" onclick="selectExperiment(1, this)">
+                        <div class="w-11 h-11 bg-indigo-500/10 text-indigo-400 rounded-xl flex items-center justify-center text-xl mb-3 border border-indigo-500/20">
                             <i class="fa-solid fa-meteor"></i>
                         </div>
-                        <span class="text-[10px] md:text-[11px] font-bold text-indigo-400 bg-indigo-950/80 px-2 py-0.5 rounded border border-indigo-800/50">물리</span>
-                        <h3 class="text-base md:text-lg font-bold mt-1.5 md:mt-2 text-white">자유낙하운동(진공, 공기중, 포물선)</h3>
-                        <p class="text-slate-400 text-xs mt-1 md:mt-1.5 leading-relaxed">진공 펌프 조작, 공기 저항, 수평 속도 및 질량을 변경하여 물체의 낙하 및 포물선 궤적을 확인합니다.</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[11px] font-bold text-indigo-400 bg-indigo-950/80 px-2 py-0.5 rounded border border-indigo-800/50">통합과학1</span>
+                            <span class="text-[11px] font-bold text-indigo-300 bg-indigo-900/60 px-2 py-0.5 rounded border border-indigo-700/50">물리학</span>
+                        </div>
+                        <h3 class="text-lg font-bold mt-2 text-white">자유낙하 운동 (진공 & 포물선)</h3>
+                        <p class="text-slate-400 text-xs mt-1.5 leading-relaxed">진공 챔버와 공기 저항, 수평 투사 속도에 따른 쇠공과 깃털의 입체 운동 자취 및 실시간 그래프를 비교합니다.</p>
                     </div>
 
                     <!-- Lab 2 -->
-                    <div class="lab-card bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:p-5 cursor-pointer relative" onclick="selectExperiment(2, this)">
-                        <div class="w-10 h-10 md:w-11 md:h-11 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-lg md:text-xl mb-2.5 md:mb-3 border border-amber-500/20">
+                    <div class="lab-card bg-slate-900/90 border border-slate-800 rounded-2xl p-5 cursor-pointer relative" onclick="selectExperiment(2, this)">
+                        <div class="w-11 h-11 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-xl mb-3 border border-amber-500/20">
                             <i class="fa-solid fa-sun"></i>
                         </div>
-                        <span class="text-[10px] md:text-[11px] font-bold text-amber-400 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-800/50">지구과학</span>
-                        <h3 class="text-base md:text-lg font-bold mt-1.5 md:mt-2 text-white">지구 열수지 시뮬레이션</h3>
-                        <p class="text-slate-400 text-xs mt-1 md:mt-1.5 leading-relaxed">태양 복사에너지, 지표면 반사율(알베도), 온실가스 농도에 따른 복사 평형 및 온도를 조작합니다.</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[11px] font-bold text-amber-400 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-800/50">통합과학2</span>
+                            <span class="text-[11px] font-bold text-amber-300 bg-amber-900/60 px-2 py-0.5 rounded border border-amber-700/50">지구시스템과학</span>
+                        </div>
+                        <h3 class="text-lg font-bold mt-2 text-white">지구 열수지 & 온실효과</h3>
+                        <p class="text-slate-400 text-xs mt-1.5 leading-relaxed">태양 복사광선 및 지구 지표면의 복사에너지 입자 파티클과 온실가스 대기층에 의한 온도 평형 시뮬레이션입니다.</p>
                     </div>
 
                     <!-- Lab 3 -->
-                    <div class="lab-card bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:p-5 cursor-pointer relative" onclick="selectExperiment(3, this)">
-                        <div class="w-10 h-10 md:w-11 md:h-11 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-lg md:text-xl mb-2.5 md:mb-3 border border-emerald-500/20">
+                    <div class="lab-card bg-slate-900/90 border border-slate-800 rounded-2xl p-5 cursor-pointer relative" onclick="selectExperiment(3, this)">
+                        <div class="w-11 h-11 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-xl mb-3 border border-emerald-500/20">
                             <i class="fa-solid fa-flask"></i>
                         </div>
-                        <span class="text-[10px] md:text-[11px] font-bold text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800/50">화학</span>
-                        <h3 class="text-base md:text-lg font-bold mt-1.5 md:mt-2 text-white">중화반응</h3>
-                        <p class="text-slate-400 text-xs mt-1 md:mt-1.5 leading-relaxed">3D 뷰렛과 플라스크에서 지시약(BTB)을 넣고 산·염기를 적정하며 pH와 반응 온도의 변화를 측정합니다.</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[11px] font-bold text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800/50">통합과학2</span>
+                            <span class="text-[11px] font-bold text-emerald-300 bg-emerald-900/60 px-2 py-0.5 rounded border border-emerald-700/50">화학</span>
+                        </div>
+                        <h3 class="text-lg font-bold mt-2 text-white">산·염기 중화 적정</h3>
+                        <p class="text-slate-400 text-xs mt-1.5 leading-relaxed">정밀 3D 뷰렛에서 떨어지는 액체 방울과 마그네틱 교반기로 혼합되는 플라스크 지시약(BTB) 변색 반응을 관찰합니다.</p>
                     </div>
 
                     <!-- Lab 4 -->
-                    <div class="lab-card bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:p-5 cursor-pointer relative" onclick="selectExperiment(4, this)">
-                        <div class="w-10 h-10 md:w-11 md:h-11 bg-rose-500/10 text-rose-400 rounded-xl flex items-center justify-center text-lg md:text-xl mb-2.5 md:mb-3 border border-rose-500/20">
+                    <div class="lab-card bg-slate-900/90 border border-slate-800 rounded-2xl p-5 cursor-pointer relative" onclick="selectExperiment(4, this)">
+                        <div class="w-11 h-11 bg-rose-500/10 text-rose-400 rounded-xl flex items-center justify-center text-xl mb-3 border border-rose-500/20">
                             <i class="fa-solid fa-vial"></i>
                         </div>
-                        <span class="text-[10px] md:text-[11px] font-bold text-rose-400 bg-rose-950/80 px-2 py-0.5 rounded border border-rose-800/50">생명과학</span>
-                        <h3 class="text-base md:text-lg font-bold mt-1.5 md:mt-2 text-white">소화효소를 이용한 영양소 분해 실험</h3>
-                        <p class="text-slate-400 text-xs mt-1 md:mt-1.5 leading-relaxed">영양소와 소화효소를 조합하고 항온 수조 온도와 pH 환경을 변경하며 영양소 분해를 관찰합니다.</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[11px] font-bold text-rose-400 bg-rose-950/80 px-2 py-0.5 rounded border border-rose-800/50">생명과학</span>
+                        </div>
+                        <h3 class="text-lg font-bold mt-2 text-white">소화효소를 활용한 영양소 분해실험</h3>
+                        <p class="text-slate-400 text-xs mt-1.5 leading-relaxed">디지털 항온 수조 속 시험관에서 온도 변화에 따른 효소 단백질의 변성과 녹말 기질 분자 분해 입자를 관찰합니다.</p>
                     </div>
 
                     <!-- Lab 5 -->
-                    <div class="lab-card bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:p-5 cursor-pointer relative" onclick="selectExperiment(5, this)">
-                        <div class="w-10 h-10 md:w-11 md:h-11 bg-cyan-500/10 text-cyan-400 rounded-xl flex items-center justify-center text-lg md:text-xl mb-2.5 md:mb-3 border border-cyan-500/20">
+                    <div class="lab-card bg-slate-900/90 border border-slate-800 rounded-2xl p-5 cursor-pointer relative" onclick="selectExperiment(5, this)">
+                        <div class="w-11 h-11 bg-cyan-500/10 text-cyan-400 rounded-xl flex items-center justify-center text-xl mb-3 border border-cyan-500/20">
                             <i class="fa-solid fa-scale-balanced"></i>
                         </div>
-                        <span class="text-[10px] md:text-[11px] font-bold text-cyan-400 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/50">화학</span>
-                        <h3 class="text-base md:text-lg font-bold mt-1.5 md:mt-2 text-white">화학 평형 (이동)</h3>
-                        <p class="text-slate-400 text-xs mt-1 md:mt-1.5 leading-relaxed">반응물 농도, 피스톤 압력, 온도를 변경하여 르샤틀리에 원리에 따른 화학 평형 이동을 확인합니다.</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[11px] font-bold text-cyan-400 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/50">화학</span>
+                        </div>
+                        <h3 class="text-lg font-bold mt-2 text-white">동적 화학 평형 & 압력 피스톤</h3>
+                        <p class="text-slate-400 text-xs mt-1.5 leading-relaxed">기계식 피스톤 및 압력 계기판 조작으로 르샤틀리에 원리에 따른 기체 분자 동적 평형 이동 반응을 확인합니다.</p>
                     </div>
 
                     <!-- Lab 6 -->
-                    <div class="lab-card bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:p-5 cursor-pointer relative" onclick="selectExperiment(6, this)">
-                        <div class="w-10 h-10 md:w-11 md:h-11 bg-purple-500/10 text-purple-400 rounded-xl flex items-center justify-center text-lg md:text-xl mb-2.5 md:mb-3 border border-purple-500/20">
+                    <div class="lab-card bg-slate-900/90 border border-slate-800 rounded-2xl p-5 cursor-pointer relative" onclick="selectExperiment(6, this)">
+                        <div class="w-11 h-11 bg-purple-500/10 text-purple-400 rounded-xl flex items-center justify-center text-xl mb-3 border border-purple-500/20">
                             <i class="fa-solid fa-glasses"></i>
                         </div>
-                        <span class="text-[10px] md:text-[11px] font-bold text-purple-400 bg-purple-950/80 px-2 py-0.5 rounded border border-purple-800/50">물리</span>
-                        <h3 class="text-base md:text-lg font-bold mt-1.5 md:mt-2 text-white">볼록렌즈의 상의 변화</h3>
-                        <p class="text-slate-400 text-xs mt-1 md:mt-1.5 leading-relaxed">광학대 위 광원, 볼록렌즈 초점거리, 스크린 위치를 이동시키며 실상과 허상의 형성을 관찰합니다.</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[11px] font-bold text-purple-400 bg-purple-950/80 px-2 py-0.5 rounded border border-purple-800/50">물리학</span>
+                        </div>
+                        <h3 class="text-lg font-bold mt-2 text-white">볼록렌즈 광학대 & 3D 상 형성</h3>
+                        <p class="text-slate-400 text-xs mt-1.5 leading-relaxed">촛불, 볼록렌즈, 스크린 광학대 상에서 레이저 광선 추적과 스크린 표면에 투영되는 도립 불꽃 상을 관찰합니다.</p>
                     </div>
 
                 </div>
             </div>
 
             <!-- Start Lab Button -->
-            <div class="my-5 md:my-6 text-center shrink-0">
-                <button id="startLabBtn" disabled onclick="startExperiment()" class="w-full max-w-md py-3 md:py-3.5 bg-slate-800 text-slate-500 font-bold rounded-xl text-sm md:text-base transition duration-200 cursor-not-allowed shadow-lg flex items-center justify-center gap-2.5 mx-auto">
-                    <span>실험을 선택해 주세요</span>
+            <div class="my-6 text-center shrink-0">
+                <button id="startLabBtn" disabled onclick="startExperiment()" class="w-full max-w-md py-3.5 bg-slate-800 text-slate-500 font-bold rounded-xl text-base transition duration-200 cursor-not-allowed shadow-lg flex items-center justify-center gap-2.5 mx-auto">
+                    <span>실험실을 선택해 주세요</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
@@ -212,45 +230,45 @@
         <section id="labScreen" class="hidden w-full h-full relative overflow-hidden">
             
             <!-- Three.js Canvas Container -->
-            <div id="threeCanvasContainer" class="w-full h-full absolute inset-0 bg-slate-950">
-                <!-- 3D Canvas injected here -->
+            <div id="threeCanvasContainer" class="w-full h-full absolute inset-0 bg-gray-950">
+                <!-- 3D WebGL Canvas -->
             </div>
 
-            <!-- 2D Canvas Overlay for Realtime Graph Overlay (Free Fall Lab) -->
-            <div id="graphOverlayContainer" class="hidden absolute top-14 left-3 right-3 md:top-auto md:left-6 md:right-auto md:bottom-6 w-auto md:w-80 lg:w-96 glass-panel rounded-2xl p-3 md:p-4 z-10 pointer-events-auto shadow-2xl transition-all">
-                <div class="flex justify-between items-center mb-1.5 pb-1 border-b border-slate-800">
+            <!-- 2D Canvas Overlay for Realtime Graph Overlay -->
+            <div id="graphOverlayContainer" class="hidden absolute top-14 left-3 right-3 md:top-auto md:left-6 md:right-auto md:bottom-6 w-auto md:w-80 lg:w-96 glass-panel rounded-2xl p-3.5 z-10 pointer-events-auto shadow-2xl transition-all">
+                <div class="flex justify-between items-center mb-2 pb-1 border-b border-slate-800">
                     <span class="text-xs font-bold text-indigo-400 flex items-center gap-1.5">
                         <i class="fa-solid fa-chart-line"></i> 시간-높이 실시간 그래프 ($y-t$)
                     </span>
                     <button onclick="toggleGraphVisibility(false)" class="text-slate-400 hover:text-slate-200 text-xs px-2 py-0.5 rounded bg-slate-800 border border-slate-700">
-                        <i class="fa-solid fa-xmark"></i> 닫기
+                        <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
-                <canvas id="freefallGraphCanvas" class="w-full h-32 md:h-40 bg-slate-950 rounded-lg border border-slate-800/80"></canvas>
+                <canvas id="freefallGraphCanvas" class="w-full h-36 bg-slate-950 rounded-lg border border-slate-800/80"></canvas>
             </div>
 
-            <!-- Floating Overlay: Top Controls -->
+            <!-- Floating Overlay: Top Bar -->
             <div class="absolute top-3 left-3 right-3 md:top-4 md:left-4 md:right-4 flex justify-between items-center pointer-events-none z-10">
-                <div class="glass-panel px-3 py-2 md:px-4 md:py-2.5 rounded-xl flex items-center gap-2 md:gap-3 pointer-events-auto shadow-xl max-w-[65%] sm:max-w-none truncate">
-                    <h3 id="currentLabTitle3D" class="text-xs md:text-sm font-bold text-white flex items-center gap-1.5 md:gap-2 truncate">
+                <div class="glass-panel px-3.5 py-2 md:px-4 md:py-2.5 rounded-xl flex items-center gap-3 pointer-events-auto shadow-xl max-w-[70%] sm:max-w-none truncate">
+                    <h3 id="currentLabTitle3D" class="text-xs md:text-sm font-bold text-white flex items-center gap-2 truncate">
                         <!-- Lab Title -->
                     </h3>
                 </div>
 
-                <div class="glass-panel px-2.5 py-1.5 md:px-3 md:py-1.5 rounded-xl text-[10px] md:text-xs text-slate-300 pointer-events-auto flex items-center gap-1.5 md:gap-2 shadow-xl shrink-0">
-                    <i class="fa-solid fa-hand-pointer text-blue-400"></i>
-                    <span class="hidden sm:inline">마우스/손가락 회전 & 핀치 확대</span>
-                    <span class="sm:hidden">드래그 회전</span>
+                <div class="glass-panel px-3 py-1.5 rounded-xl text-xs text-slate-300 pointer-events-auto flex items-center gap-2 shadow-xl shrink-0">
+                    <i class="fa-solid fa-arrows-spin text-cyan-400 animate-spin" style="animation-duration: 6s;"></i>
+                    <span class="hidden sm:inline">3D 스튜디오 조작: 드래그 회전 / 휠 확대</span>
+                    <span class="sm:hidden">회전 & 줌</span>
                 </div>
             </div>
 
-            <!-- Floating Overlay: Responsive Right Panel (Mobile Collapsible Bottom Sheet / PC Sidebar) -->
-            <div id="controlsPanel3D" class="absolute bottom-0 inset-x-0 md:top-20 md:right-4 md:bottom-6 md:left-auto w-full md:w-80 lg:w-96 glass-panel rounded-t-2xl md:rounded-2xl p-3.5 md:p-5 flex flex-col justify-between z-20 pointer-events-auto transition-all duration-300 max-h-[55vh] md:max-h-none overflow-y-auto custom-scrollbar">
+            <!-- Floating Overlay: Controls Panel -->
+            <div id="controlsPanel3D" class="absolute bottom-0 inset-x-0 md:top-20 md:right-4 md:bottom-6 md:left-auto w-full md:w-80 lg:w-96 glass-panel rounded-t-2xl md:rounded-2xl p-4 flex flex-col justify-between z-20 pointer-events-auto transition-all duration-300 max-h-[60vh] md:max-h-none overflow-y-auto custom-scrollbar">
                 
                 <!-- Mobile Panel Collapsible Handle Header -->
                 <div class="flex md:hidden items-center justify-between pb-2 mb-2 border-b border-slate-800 cursor-pointer" onclick="toggleMobilePanel()">
-                    <span class="text-xs font-bold text-blue-400 flex items-center gap-1.5">
-                        <i class="fa-solid fa-sliders"></i> 실험 제어판
+                    <span class="text-xs font-bold text-cyan-400 flex items-center gap-1.5">
+                        <i class="fa-solid fa-sliders"></i> 실험 대시보드
                     </span>
                     <button id="mobilePanelToggleBtn" class="text-slate-400 text-xs px-2 py-0.5 rounded bg-slate-800 border border-slate-700 flex items-center gap-1">
                         <span id="mobilePanelToggleText">접기</span>
@@ -258,24 +276,24 @@
                     </button>
                 </div>
 
-                <div id="controlsPanelContent" class="space-y-3.5 md:space-y-4">
+                <div id="controlsPanelContent" class="space-y-4">
                     <div>
-                        <h4 class="hidden md:flex text-xs font-extrabold text-blue-400 uppercase tracking-wider mb-3 items-center gap-2 pb-2 border-b border-slate-800">
-                            <i class="fa-solid fa-sliders"></i> 실험 제어 및 변수 조작
+                        <h4 class="hidden md:flex text-xs font-extrabold text-cyan-400 uppercase tracking-wider mb-3 items-center gap-2 pb-2 border-b border-slate-800">
+                            <i class="fa-solid fa-sliders"></i> 실험 조작 및 데이터 변수
                         </h4>
 
                         <!-- Dynamic Controls -->
-                        <div id="controlsContainer3D" class="space-y-3.5 md:space-y-4">
+                        <div id="controlsContainer3D" class="space-y-3.5">
                             <!-- Dynamic Controls Rendered via JS -->
                         </div>
                     </div>
 
-                    <!-- Realtime Measurements & Textbook Principles -->
-                    <div class="pt-2.5 md:pt-3 border-t border-slate-800/80">
-                        <h5 class="text-[11px] md:text-xs font-bold text-slate-300 flex items-center gap-1.5 mb-1.5 md:mb-2">
-                            <i class="fa-solid fa-chart-simple text-teal-400"></i> 실시간 관찰 데이터
+                    <!-- Realtime Measurements -->
+                    <div class="pt-3 border-t border-slate-800/80">
+                        <h5 class="text-xs font-bold text-slate-300 flex items-center gap-1.5 mb-2">
+                            <i class="fa-solid fa-gauge-high text-emerald-400"></i> 실시간 관측 모니터링
                         </h5>
-                        <div id="liveData3D" class="text-[11px] md:text-xs text-slate-300 bg-slate-950/80 p-2.5 md:p-3 rounded-xl border border-slate-800/80 leading-relaxed space-y-1">
+                        <div id="liveData3D" class="text-xs text-slate-300 bg-slate-950/80 p-3 rounded-xl border border-slate-800/80 leading-relaxed space-y-1 font-mono">
                             <!-- Live Data -->
                         </div>
                     </div>
@@ -287,14 +305,13 @@
 
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-800/80 py-2 md:py-2.5 text-center text-[10px] md:text-[11px] text-slate-500 bg-slate-950 shrink-0">
-        <p>© 2026 교과서 속 가상 과학 실험실 - Interactive Virtual Science Laboratory</p>
+    <footer class="border-t border-slate-900 py-2 text-center text-[11px] text-slate-500 bg-slate-950 shrink-0">
+        <p>© 2026 교과서 속 가상 과학 실험실 Pro 3D - High Precision Science Engine</p>
     </footer>
 
-    <!-- Three.js 3D Physics/Chemistry Engine -->
+    <!-- Three.js 3D Interactive Science Engine -->
     <script>
-        // Global App State
+        // App State
         let selectedLabId = null;
         let currentLabId = null;
         let isGraphVisible = true;
@@ -305,17 +322,16 @@
         let animFrameId = null;
         let active3DObjects = {};
 
-        // Lab Master Data
+        // Lab Master Meta
         const labMeta = {
-            1: { title: "자유낙하운동(진공, 공기중, 포물선)", icon: "fa-meteor", color: "indigo" },
-            2: { title: "지구 열수지 시뮬레이션", icon: "fa-sun", color: "amber" },
-            3: { title: "중화반응", icon: "fa-flask", color: "emerald" },
-            4: { title: "소화효소를 이용한 영양소 분해 실험", icon: "fa-vial", color: "rose" },
-            5: { title: "화학 평형 (이동)", icon: "fa-scale-balanced", color: "cyan" },
-            6: { title: "볼록렌즈의 상의 변화", icon: "fa-glasses", color: "purple" }
+            1: { title: "자유낙하 운동 (진공 & 포물선)", icon: "fa-meteor", color: "indigo" },
+            2: { title: "지구 열수지 & 온실효과", icon: "fa-sun", color: "amber" },
+            3: { title: "산·염기 중화 적정", icon: "fa-flask", color: "emerald" },
+            4: { title: "소화효소를 활용한 영양소 분해실험", icon: "fa-vial", color: "rose" },
+            5: { title: "동적 화학 평형 & 압력 피스톤", icon: "fa-scale-balanced", color: "cyan" },
+            6: { title: "볼록렌즈 광학대 & 3D 상 형성", icon: "fa-glasses", color: "purple" }
         };
 
-        // Card Selection
         function selectExperiment(id, cardElem) {
             selectedLabId = id;
             document.querySelectorAll('.lab-card').forEach(c => c.classList.remove('selected-card'));
@@ -323,11 +339,10 @@
 
             const btn = document.getElementById('startLabBtn');
             btn.disabled = false;
-            btn.className = "w-full max-w-md py-3 md:py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm md:text-base transition duration-200 cursor-pointer shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2.5 mx-auto";
-            btn.innerHTML = `<span>'${labMeta[id].title}' 시작하기</span> <i class="fa-solid fa-play"></i>`;
+            btn.className = "w-full max-w-md py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-base transition duration-200 cursor-pointer shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2.5 mx-auto";
+            btn.innerHTML = `<span>'${labMeta[id].title}' 3D 연구실 진입</span> <i class="fa-solid fa-play"></i>`;
         }
 
-        // Toggle Mobile Bottom Drawer
         function toggleMobilePanel() {
             isMobilePanelCollapsed = !isMobilePanelCollapsed;
             const content = document.getElementById('controlsPanelContent');
@@ -345,7 +360,6 @@
             }
         }
 
-        // Start 3D Lab
         function startExperiment() {
             if (!selectedLabId) return;
             currentLabId = selectedLabId;
@@ -357,12 +371,10 @@
             const meta = labMeta[currentLabId];
             document.getElementById('currentLabTitle3D').innerHTML = `<i class="fa-solid ${meta.icon} text-${meta.color}-400"></i> ${meta.title}`;
 
-            // Reset mobile panel state
             isMobilePanelCollapsed = false;
             const content = document.getElementById('controlsPanelContent');
             if (content) content.classList.remove('hidden');
 
-            // Show graph panel if Free Fall Lab
             const graphBox = document.getElementById('graphOverlayContainer');
             if (currentLabId === 1 && isGraphVisible) {
                 graphBox.classList.remove('hidden');
@@ -391,22 +403,36 @@
                 graphBox.classList.add('hidden');
             }
 
-            // Sync toggle button state in control panel
             const toggleBtn = document.getElementById('btnGraphToggleSwitch');
             if (toggleBtn) {
                 toggleBtn.className = isGraphVisible ?
-                    "w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 border border-indigo-500" :
-                    "w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs rounded-xl flex items-center justify-center gap-2 border border-slate-700";
+                    "w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-indigo-500" :
+                    "w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-slate-700";
                 toggleBtn.innerHTML = isGraphVisible ?
-                    `<i class="fa-solid fa-chart-line"></i> <span>실시간 그래프 ON (표시 중)</span>` :
-                    `<i class="fa-solid fa-eye-slash"></i> <span>실시간 그래프 OFF (숨김)</span>`;
+                    `<i class="fa-solid fa-chart-line"></i> <span>그래프 ON</span>` :
+                    `<i class="fa-solid fa-eye-slash"></i> <span>그래프 OFF</span>`;
             }
         }
 
-        // Initialize Three.js Scene, Camera, Renderer, and Orbit Controls
+        function setCameraPreset(mode) {
+            if (!controls || !camera) return;
+            if (mode === 'overview') {
+                camera.position.set(0, 12, 30);
+                controls.target.set(0, 5, 0);
+            } else if (mode === 'focus') {
+                camera.position.set(0, 6, 16);
+                controls.target.set(0, 4, 0);
+            } else if (mode === 'top') {
+                camera.position.set(0, 28, 1);
+                controls.target.set(0, 2, 0);
+            }
+            controls.update();
+        }
+
+        // Initialize Photorealistic Studio Lighting & Scene
         function init3DScene() {
             const container = document.getElementById('threeCanvasContainer');
-            container.innerHTML = ''; // Clear previous canvas
+            container.innerHTML = '';
 
             if (animFrameId) {
                 cancelAnimationFrame(animFrameId);
@@ -414,47 +440,69 @@
             }
 
             scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x080c14);
+            scene.background = new THREE.Color(0x1e293b);
+            scene.fog = new THREE.FogExp2(0x1e293b, 0.008);
 
             const isMobile = window.innerWidth < 768;
             camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-            camera.position.set(0, 10, isMobile ? 36 : 28);
+            camera.position.set(0, 10, isMobile ? 32 : 26);
 
-            renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+            renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance", alpha: false });
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             renderer.setSize(container.clientWidth, container.clientHeight);
             renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.65;
             container.appendChild(renderer.domElement);
 
             controls = new THREE.OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
             controls.dampingFactor = 0.05;
-            
-            // Touch navigation optimizations
-            controls.touches = {
-                ONE: THREE.TOUCH.ROTATE,
-                TWO: THREE.TOUCH.DOLLY_PAN
-            };
+            controls.maxPolarAngle = Math.PI / 2 + 0.05; // Prevent camera going under floor
 
-            // Lighting Setup
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+            // Studio Lights Setup - High Intensity
+            const ambientLight = new THREE.AmbientLight(0xffffff, 2.0);
             scene.add(ambientLight);
 
-            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            dirLight.position.set(15, 25, 15);
-            dirLight.castShadow = true;
-            scene.add(dirLight);
+            const topDirectionalLight = new THREE.DirectionalLight(0xffffff, 1.8);
+            topDirectionalLight.position.set(0, 35, 15);
+            scene.add(topDirectionalLight);
 
-            const pointLight = new THREE.PointLight(0x3b82f6, 0.6, 50);
-            pointLight.position.set(-10, 12, -10);
-            scene.add(pointLight);
+            const mainSpotLight = new THREE.SpotLight(0xffffff, 3.5);
+            mainSpotLight.position.set(12, 28, 18);
+            mainSpotLight.angle = Math.PI / 3;
+            mainSpotLight.penumbra = 0.6;
+            mainSpotLight.castShadow = true;
+            mainSpotLight.shadow.mapSize.width = 1024;
+            mainSpotLight.shadow.mapSize.height = 1024;
+            scene.add(mainSpotLight);
 
-            // Grid Floor
-            const gridHelper = new THREE.GridHelper(40, 40, 0x334155, 0x1e293b);
-            gridHelper.position.y = 0;
+            const rimLight = new THREE.PointLight(0x38bdf8, 2.2, 50);
+            rimLight.position.set(-15, 15, -10);
+            scene.add(rimLight);
+
+            const warmFillLight = new THREE.PointLight(0xfbbf24, 2.0, 45);
+            warmFillLight.position.set(15, 12, -5);
+            scene.add(warmFillLight);
+
+            // Laboratory Desk Surface (Reflective Bright Metallic Table)
+            const deskGeo = new THREE.BoxGeometry(40, 1, 24);
+            const deskMat = new THREE.MeshStandardMaterial({
+                color: 0x334155,
+                roughness: 0.2,
+                metalness: 0.3
+            });
+            const desk = new THREE.Mesh(deskGeo, deskMat);
+            desk.position.set(0, -0.5, 0);
+            desk.receiveShadow = true;
+            scene.add(desk);
+
+            // Bright Grid Lines on Desk
+            const gridHelper = new THREE.GridHelper(36, 36, 0x60a5fa, 0x475569);
+            gridHelper.position.y = 0.01;
             scene.add(gridHelper);
 
-            // Window Resize Listener
             window.removeEventListener('resize', onWindowResize);
             window.addEventListener('resize', onWindowResize, false);
         }
@@ -462,28 +510,20 @@
         function onWindowResize() {
             const container = document.getElementById('threeCanvasContainer');
             if (!container || !camera || !renderer) return;
-            
             camera.aspect = container.clientWidth / container.clientHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(container.clientWidth, container.clientHeight);
 
-            // Redraw graph if visible
             if (currentLabId === 1 && active3DObjects.drawGraph) {
                 active3DObjects.drawGraph();
             }
         }
 
-        // Load corresponding 3D lab module
         function loadLab3DScene(labId) {
             const ctrl = document.getElementById('controlsContainer3D');
             const liveData = document.getElementById('liveData3D');
-            const isMobile = window.innerWidth < 768;
 
-            if (labId === 1) camera.position.set(0, 12, isMobile ? 38 : 32);
-            else if (labId === 2) camera.position.set(0, 8, isMobile ? 28 : 22);
-            else camera.position.set(0, 10, isMobile ? 32 : 25);
-
-            controls.target.set(0, 5, 0);
+            controls.target.set(0, 4.5, 0);
             controls.update();
 
             switch (labId) {
@@ -497,36 +537,71 @@
         }
 
         /* ====================================================================
-           1. 자유낙하운동(진공, 공기중, 포물선)
+           1. 자유낙하운동 (3D 진공관, 가공 피팅, 실시간 파티클 자취)
            ==================================================================== */
         function setupFreeFall3D(ctrl, liveData) {
-            const tubeGeo = new THREE.BoxGeometry(20, 20, 6);
-            const tubeMat = new THREE.MeshPhysicalMaterial({
-                color: 0xffffff, transparent: true, opacity: 0.2, roughness: 0.1, transmission: 0.9, thickness: 0.5
-            });
-            const tube = new THREE.Mesh(tubeGeo, tubeMat);
-            tube.position.set(0, 10, 0);
-            scene.add(tube);
+            // Wide High-Tech Vacuum Chamber Base Stand
+            const baseGeo = new THREE.BoxGeometry(22, 0.6, 7);
+            const baseMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.8, roughness: 0.3 });
+            const base = new THREE.Mesh(baseGeo, baseMat);
+            base.position.set(1, 0.3, 0);
+            scene.add(base);
 
-            const ballGeo = new THREE.SphereGeometry(0.6, 32, 32);
-            const ballMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, metalness: 0.8, roughness: 0.2 });
+            // Wide Glass Vacuum Chamber (Fully accommodates horizontal projectile trajectory up to vx=12)
+            const glassGeo = new THREE.BoxGeometry(21.2, 18.2, 6.2);
+            const glassMat = new THREE.MeshPhysicalMaterial({
+                color: 0xffffff, transparent: true, opacity: 0.22, roughness: 0.05, transmission: 0.92, thickness: 0.5, side: THREE.DoubleSide
+            });
+            const glassChamber = new THREE.Mesh(glassGeo, glassMat);
+            glassChamber.position.set(1, 9.6, 0);
+            scene.add(glassChamber);
+
+            // Metallic Frame Edges for Chamber Structural Integrity
+            const frameGeo = new THREE.BoxGeometry(21.4, 18.4, 6.4);
+            const wireGeo = new THREE.WireframeGeometry(frameGeo);
+            const frameMat = new THREE.LineBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.5 });
+            const chamberFrame = new THREE.LineSegments(wireGeo, frameMat);
+            chamberFrame.position.copy(glassChamber.position);
+            scene.add(chamberFrame);
+
+            // Upper Vacuum Valve & Heavy Duty Cap
+            const capGeo = new THREE.BoxGeometry(22, 0.8, 7);
+            const capMat = new THREE.MeshStandardMaterial({ color: 0xd97706, metalness: 0.9, roughness: 0.2 });
+            const topCap = new THREE.Mesh(capGeo, capMat);
+            topCap.position.set(1, 18.8, 0);
+            scene.add(topCap);
+
+            // Steel Ball
+            const ballGeo = new THREE.SphereGeometry(0.65, 32, 32);
+            const ballMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, metalness: 0.9, roughness: 0.1 });
             const ball = new THREE.Mesh(ballGeo, ballMat);
-            ball.position.set(-8, 19, 0);
+            ball.castShadow = true;
+            ball.position.set(-8, 17.5, -0.4);
             scene.add(ball);
 
-            const featherGeo = new THREE.ConeGeometry(0.5, 1.2, 16);
-            const featherMat = new THREE.MeshStandardMaterial({ color: 0xf43f5e, roughness: 0.8 });
-            const feather = new THREE.Mesh(featherGeo, featherMat);
-            feather.position.set(-8, 19, 1);
-            scene.add(feather);
+            // Organic Feather Model
+            const featherGroup = new THREE.Group();
+            const fStemGeo = new THREE.CylinderGeometry(0.04, 0.04, 1.4, 8);
+            const fStemMat = new THREE.MeshStandardMaterial({ color: 0xffffff });
+            const fStem = new THREE.Mesh(fStemGeo, fStemMat);
+            featherGroup.add(fStem);
 
-            // 궤적(자취) 표시용 그룹
+            const fVaneGeo = new THREE.ConeGeometry(0.45, 1.2, 16);
+            const fVaneMat = new THREE.MeshStandardMaterial({ color: 0xf43f5e, roughness: 0.8 });
+            const fVane = new THREE.Mesh(fVaneGeo, fVaneMat);
+            fVane.position.y = 0.2;
+            featherGroup.add(fVane);
+
+            featherGroup.position.set(-8, 17.5, 0.4);
+            scene.add(featherGroup);
+
             const trajGroup = new THREE.Group();
             scene.add(trajGroup);
 
             active3DObjects = {
-                ball, feather, trajGroup,
+                ball, featherGroup, trajGroup, glassChamber, chamberFrame,
                 showTrajectory: true,
+                showChamberGlass: true,
                 isVacuum: false,
                 vx1: 0,
                 vx2: 0,
@@ -545,34 +620,40 @@
 
                     <button id="btnTrajToggleSwitch" class="w-full py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-blue-500">
                         <i class="fa-solid fa-route"></i>
-                        <span>운동 자취 ON</span>
+                        <span>궤적 자취 ON</span>
                     </button>
                 </div>
 
-                <button id="btnVac3D" class="w-full py-2.5 bg-slate-800 text-slate-300 font-bold text-xs rounded-xl border border-slate-700 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-wind"></i> <span>공기중 (공기 저항 존재)</span>
-                </button>
+                <div class="grid grid-cols-2 gap-2">
+                    <button id="btnVac3D" class="w-full py-2 bg-slate-800 text-slate-300 font-bold text-xs rounded-xl border border-slate-700 flex items-center justify-center gap-1.5 transition">
+                        <i class="fa-solid fa-wind"></i> <span>공기중 (마찰 작용)</span>
+                    </button>
 
-                <div>
-                    <div class="flex justify-between text-xs text-slate-300 mb-1">
-                        <span>쇠공 수평 속도 ($v_{x1}$)</span> <span id="vxVal13D" class="font-bold text-sky-400">0 m/s (자유낙하)</span>
-                    </div>
-                    <input type="range" id="vxRange13D" min="0" max="15" value="0" step="0.5" class="w-full accent-sky-500">
+                    <button id="btnChamberToggleSwitch" class="w-full py-2 bg-cyan-900/60 hover:bg-cyan-800 text-cyan-200 font-bold text-xs rounded-xl border border-cyan-700/60 flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-cube"></i> <span>챔버 외벽 ON</span>
+                    </button>
                 </div>
 
                 <div>
                     <div class="flex justify-between text-xs text-slate-300 mb-1">
-                        <span>깃털 수평 속도 ($v_{x2}$)</span> <span id="vxVal23D" class="font-bold text-rose-400">0 m/s (자유낙하)</span>
+                        <span>쇠공 수평 속도 ($v_{x1}$)</span> <span id="vxVal13D" class="font-bold text-sky-400">0 m/s</span>
                     </div>
-                    <input type="range" id="vxRange23D" min="0" max="15" value="0" step="0.5" class="w-full accent-rose-500">
+                    <input type="range" id="vxRange13D" min="0" max="12" value="0" step="0.5" class="w-full accent-sky-500">
+                </div>
+
+                <div>
+                    <div class="flex justify-between text-xs text-slate-300 mb-1">
+                        <span>깃털 수평 속도 ($v_{x2}$)</span> <span id="vxVal23D" class="font-bold text-rose-400">0 m/s</span>
+                    </div>
+                    <input type="range" id="vxRange23D" min="0" max="12" value="0" step="0.5" class="w-full accent-rose-500">
                 </div>
 
                 <div class="flex gap-2 pt-1">
-                    <button id="btnDropToggle" class="flex-1 py-2.5 md:py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg flex items-center justify-center gap-2">
+                    <button id="btnDropToggle" class="flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg flex items-center justify-center gap-2">
                         <i class="fa-solid fa-play"></i> <span>낙하 시작</span>
                     </button>
-                    <button id="btnDropReset" class="px-3.5 py-2.5 md:py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs rounded-xl">
-                        <i class="fa-solid fa-rotate-left"></i> <span>초기화</span>
+                    <button id="btnDropReset" class="px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs rounded-xl border border-slate-700">
+                        <i class="fa-solid fa-rotate-left"></i>
                     </button>
                 </div>
             `;
@@ -581,53 +662,55 @@
             const btnToggle = document.getElementById('btnDropToggle');
             const btnReset = document.getElementById('btnDropReset');
             const btnTraj = document.getElementById('btnTrajToggleSwitch');
-            const vxRange1 = document.getElementById('vxRange13D');
-            const vxVal1Text = document.getElementById('vxVal13D');
-            const vxRange2 = document.getElementById('vxRange23D');
-            const vxVal2Text = document.getElementById('vxVal23D');
+            const btnChamber = document.getElementById('btnChamberToggleSwitch');
+
+            btnChamber.onclick = function() {
+                active3DObjects.showChamberGlass = !active3DObjects.showChamberGlass;
+                glassChamber.visible = active3DObjects.showChamberGlass;
+                chamberFrame.visible = active3DObjects.showChamberGlass;
+                this.className = active3DObjects.showChamberGlass ? 
+                    "w-full py-2 bg-cyan-900/60 hover:bg-cyan-800 text-cyan-200 font-bold text-xs rounded-xl border border-cyan-700/60 flex items-center justify-center gap-1.5" :
+                    "w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-400 font-bold text-xs rounded-xl border border-slate-700 flex items-center justify-center gap-1.5";
+                this.innerHTML = active3DObjects.showChamberGlass ?
+                    `<i class="fa-solid fa-cube"></i> <span>챔버 외벽 ON</span>` :
+                    `<i class="fa-solid fa-cube text-slate-500"></i> <span>챔버 외벽 OFF</span>`;
+            };
 
             btnTraj.onclick = function() {
                 active3DObjects.showTrajectory = !active3DObjects.showTrajectory;
                 trajGroup.visible = active3DObjects.showTrajectory;
-                
-                if (active3DObjects.showTrajectory) {
-                    this.className = "w-full py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-blue-500";
-                    this.innerHTML = `<i class="fa-solid fa-route"></i> <span>운동 자취 ON</span>`;
-                } else {
-                    this.className = "w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-400 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-slate-700";
-                    this.innerHTML = `<i class="fa-solid fa-eye-slash"></i> <span>운동 자취 OFF</span>`;
-                }
+                this.className = active3DObjects.showTrajectory ? 
+                    "w-full py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-blue-500" :
+                    "w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-400 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-slate-700";
             };
 
             btnVac.onclick = function() {
                 active3DObjects.isVacuum = !active3DObjects.isVacuum;
                 this.className = active3DObjects.isVacuum ? 
-                    "w-full py-2.5 bg-emerald-600 text-white font-bold text-xs rounded-xl border border-emerald-500 flex items-center justify-center gap-2" :
-                    "w-full py-2.5 bg-slate-800 text-slate-300 font-bold text-xs rounded-xl border border-slate-700 flex items-center justify-center gap-2";
-                this.innerHTML = active3DObjects.isVacuum ? `<i class="fa-solid fa-check"></i> 진공 상태 (공기 저항 없음)` : `<i class="fa-solid fa-wind"></i> 공기중 (공기 저항 존재)`;
+                    "w-full py-2 bg-emerald-600 text-white font-bold text-xs rounded-xl border border-emerald-500 flex items-center justify-center gap-1.5" :
+                    "w-full py-2 bg-slate-800 text-slate-300 font-bold text-xs rounded-xl border border-slate-700 flex items-center justify-center gap-1.5";
+                this.innerHTML = active3DObjects.isVacuum ? `<i class="fa-solid fa-check"></i> <span>진공 (공기저항 0)</span>` : `<i class="fa-solid fa-wind"></i> <span>공기중 (마찰 작용)</span>`;
             };
 
-            vxRange1.oninput = (e) => {
-                const val = +e.target.value;
-                active3DObjects.vx1 = val;
-                vxVal1Text.innerText = val === 0 ? "0 m/s (자유낙하)" : `${val} m/s (포물선)`;
+            document.getElementById('vxRange13D').oninput = (e) => {
+                active3DObjects.vx1 = +e.target.value;
+                document.getElementById('vxVal13D').innerText = `${e.target.value} m/s`;
             };
 
-            vxRange2.oninput = (e) => {
-                const val = +e.target.value;
-                active3DObjects.vx2 = val;
-                vxVal2Text.innerText = val === 0 ? "0 m/s (자유낙하)" : `${val} m/s (포물선)`;
+            document.getElementById('vxRange23D').oninput = (e) => {
+                active3DObjects.vx2 = +e.target.value;
+                document.getElementById('vxVal23D').innerText = `${e.target.value} m/s`;
             };
 
             btnToggle.onclick = () => {
                 if (active3DObjects.status === 'stopped' || active3DObjects.status === 'paused') {
                     active3DObjects.status = 'running';
-                    btnToggle.className = "flex-1 py-2.5 md:py-3 bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs rounded-xl shadow-lg flex items-center justify-center gap-2";
-                    btnToggle.innerHTML = `<i class="fa-solid fa-pause"></i> <span>낙하 일시정지</span>`;
-                } else if (active3DObjects.status === 'running') {
+                    btnToggle.className = "flex-1 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs rounded-xl shadow-lg flex items-center justify-center gap-2";
+                    btnToggle.innerHTML = `<i class="fa-solid fa-pause"></i> <span>일시정지</span>`;
+                } else {
                     active3DObjects.status = 'paused';
-                    btnToggle.className = "flex-1 py-2.5 md:py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-lg flex items-center justify-center gap-2";
-                    btnToggle.innerHTML = `<i class="fa-solid fa-play"></i> <span>낙하 재개</span>`;
+                    btnToggle.className = "flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-lg flex items-center justify-center gap-2";
+                    btnToggle.innerHTML = `<i class="fa-solid fa-play"></i> <span>재개</span>`;
                 }
             };
 
@@ -636,19 +719,16 @@
                 active3DObjects.t = 0;
                 active3DObjects.lastTrajT = -1;
                 active3DObjects.history = [];
-                
-                // 자취 점 잔상 제거
                 while (trajGroup.children.length > 0) {
                     const obj = trajGroup.children[0];
                     if (obj.geometry) obj.geometry.dispose();
                     if (obj.material) obj.material.dispose();
                     trajGroup.remove(obj);
                 }
-
-                ball.position.set(-8, 19, 0);
-                feather.position.set(-8, 19, 1);
-
-                btnToggle.className = "flex-1 py-2.5 md:py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg flex items-center justify-center gap-2";
+                ball.position.set(-8, 17.5, -0.4);
+                featherGroup.position.set(-8, 17.5, 0.4);
+                featherGroup.rotation.z = 0;
+                btnToggle.className = "flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg flex items-center justify-center gap-2";
                 btnToggle.innerHTML = `<i class="fa-solid fa-play"></i> <span>낙하 시작</span>`;
                 drawGraph();
             };
@@ -658,67 +738,51 @@
 
             function drawGraph() {
                 if (!isGraphVisible || !gCanvas.parentElement) return;
-
                 const parentW = gCanvas.parentElement.clientWidth;
-                gCanvas.width = parentW > 64 ? parentW - 24 : 280;
-                gCanvas.height = window.innerWidth < 768 ? 120 : 150;
+                gCanvas.width = parentW > 64 ? parentW - 28 : 280;
+                gCanvas.height = 140;
                 gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
 
                 const curT = active3DObjects.t;
-                let maxT = 2.5;
-                if (curT > 2.0) {
-                    maxT = Math.ceil(curT * 1.2 * 2) / 2;
-                }
+                let maxT = Math.max(2.2, curT * 1.15);
 
                 gCtx.strokeStyle = '#334155';
                 gCtx.lineWidth = 1;
                 gCtx.beginPath();
-                const bottomY = gCanvas.height - 20;
-                gCtx.moveTo(28, 10); gCtx.lineTo(28, bottomY); gCtx.lineTo(gCanvas.width - 10, bottomY);
+                const bottomY = gCanvas.height - 24;
+                gCtx.moveTo(30, 10); gCtx.lineTo(30, bottomY); gCtx.lineTo(gCanvas.width - 10, bottomY);
                 gCtx.stroke();
 
                 gCtx.fillStyle = '#94a3b8';
                 gCtx.font = '10px Pretendard';
                 gCtx.fillText('20m', 2, 16);
                 gCtx.fillText('0m', 8, bottomY);
-                gCtx.fillText('0s', 26, bottomY + 12);
-                gCtx.fillText(`${maxT.toFixed(1)}s`, gCanvas.width - 28, bottomY + 12);
-
-                gCtx.fillStyle = '#38bdf8';
-                gCtx.fillRect(gCanvas.width - 100, 8, 8, 8);
-                gCtx.fillText('쇠공', gCanvas.width - 88, 15);
-
-                gCtx.fillStyle = '#f43f5e';
-                gCtx.fillRect(gCanvas.width - 55, 8, 8, 8);
-                gCtx.fillText('깃털', gCanvas.width - 43, 15);
+                gCtx.fillText('0s', 28, bottomY + 14);
+                gCtx.fillText(`${maxT.toFixed(1)}s`, gCanvas.width - 28, bottomY + 14);
 
                 const list = active3DObjects.history;
                 if (list.length < 2) return;
 
-                const plotW = gCanvas.width - 38;
+                const plotW = gCanvas.width - 40;
                 const plotH = bottomY - 15;
 
-                // Ball Plot
                 gCtx.strokeStyle = '#38bdf8';
                 gCtx.lineWidth = 2;
                 gCtx.beginPath();
                 list.forEach((pt, i) => {
-                    const x = 28 + (pt.t / maxT) * plotW;
+                    const x = 30 + (pt.t / maxT) * plotW;
                     const y = bottomY - (pt.yBall / 20) * plotH;
-                    if (i === 0) gCtx.moveTo(x, y);
-                    else gCtx.lineTo(x, y);
+                    if (i === 0) gCtx.moveTo(x, y); else gCtx.lineTo(x, y);
                 });
                 gCtx.stroke();
 
-                // Feather Plot
                 gCtx.strokeStyle = '#f43f5e';
                 gCtx.lineWidth = 2;
                 gCtx.beginPath();
                 list.forEach((pt, i) => {
-                    const x = 28 + (pt.t / maxT) * plotW;
+                    const x = 30 + (pt.t / maxT) * plotW;
                     const y = bottomY - (pt.yFeather / 20) * plotH;
-                    if (i === 0) gCtx.moveTo(x, y);
-                    else gCtx.lineTo(x, y);
+                    if (i === 0) gCtx.moveTo(x, y); else gCtx.lineTo(x, y);
                 });
                 gCtx.stroke();
             }
@@ -732,126 +796,148 @@
                 if (active3DObjects.status === 'running') {
                     active3DObjects.t += 0.025;
                     const g = 9.8;
-                    const vx1 = active3DObjects.vx1;
-                    const vx2 = active3DObjects.vx2;
-                    const dragFeather = active3DObjects.isVacuum ? 0 : 5.5;
+                    const drag = active3DObjects.isVacuum ? 0 : 6.2;
 
-                    let realHeightBall = 20 - 0.5 * g * Math.pow(active3DObjects.t, 2);
-                    let realHeightFeather = 20 - 0.5 * Math.max(0.5, g - dragFeather) * Math.pow(active3DObjects.t, 2);
+                    let yB = 20 - 0.5 * g * Math.pow(active3DObjects.t, 2);
+                    let yF = 20 - 0.5 * Math.max(0.6, g - drag) * Math.pow(active3DObjects.t, 2);
 
-                    if (realHeightBall < 0) realHeightBall = 0;
-                    if (realHeightFeather < 0) realHeightFeather = 0;
+                    if (yB < 0) yB = 0;
+                    if (yF < 0) yF = 0;
 
-                    ball.position.y = 1 + (realHeightBall / 20) * 18;
-                    feather.position.y = 1 + (realHeightFeather / 20) * 18;
+                    ball.position.y = 0.5 + (yB / 20) * 17;
+                    featherGroup.position.y = 0.5 + (yF / 20) * 17;
 
-                    const xPosBall = Math.min(8, -8 + vx1 * active3DObjects.t * 0.8);
-                    const xPosFeather = Math.min(8, -8 + vx2 * (active3DObjects.isVacuum ? 1 : 0.6) * active3DObjects.t * 0.8);
+                    if (!active3DObjects.isVacuum && yF > 0) {
+                        featherGroup.rotation.z = Math.sin(active3DObjects.t * 12) * 0.35;
+                    }
 
-                    if (realHeightBall > 0) ball.position.x = xPosBall;
-                    if (realHeightFeather > 0) feather.position.x = xPosFeather;
+                    if (yB > 0) ball.position.x = -8 + active3DObjects.vx1 * active3DObjects.t * 0.75;
+                    if (yF > 0) featherGroup.position.x = -8 + active3DObjects.vx2 * (active3DObjects.isVacuum ? 1 : 0.55) * active3DObjects.t * 0.75;
 
-                    // 일정 시간 간격(0.1초 마다) 자취 점 찍기
-                    if (active3DObjects.t - active3DObjects.lastTrajT >= 0.1) {
+                    if (active3DObjects.t - active3DObjects.lastTrajT >= 0.08) {
                         active3DObjects.lastTrajT = active3DObjects.t;
-
-                        if (realHeightBall > 0) {
-                            const pGeo = new THREE.SphereGeometry(0.12, 8, 8);
-                            const pMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
-                            const dot = new THREE.Mesh(pGeo, pMat);
+                        if (yB > 0) {
+                            const dot = new THREE.Mesh(new THREE.SphereGeometry(0.12, 8, 8), new THREE.MeshBasicMaterial({ color: 0x38bdf8 }));
                             dot.position.copy(ball.position);
                             trajGroup.add(dot);
                         }
-
-                        if (realHeightFeather > 0) {
-                            const pGeo = new THREE.SphereGeometry(0.12, 8, 8);
-                            const pMat = new THREE.MeshBasicMaterial({ color: 0xf43f5e });
-                            const dot = new THREE.Mesh(pGeo, pMat);
-                            dot.position.copy(feather.position);
+                        if (yF > 0) {
+                            const dot = new THREE.Mesh(new THREE.SphereGeometry(0.12, 8, 8), new THREE.MeshBasicMaterial({ color: 0xf43f5e }));
+                            dot.position.copy(featherGroup.position);
                             trajGroup.add(dot);
                         }
                     }
 
-                    active3DObjects.history.push({
-                        t: active3DObjects.t,
-                        yBall: realHeightBall,
-                        yFeather: realHeightFeather
-                    });
-
+                    active3DObjects.history.push({ t: active3DObjects.t, yBall: yB, yFeather: yF });
                     drawGraph();
 
-                    if (realHeightBall <= 0 && realHeightFeather <= 0) {
+                    if (yB <= 0 && yF <= 0) {
                         active3DObjects.status = 'paused';
-                        btnToggle.className = "flex-1 py-2.5 md:py-3 bg-slate-800 text-slate-400 font-bold text-xs rounded-xl cursor-not-allowed";
+                        btnToggle.className = "flex-1 py-2.5 bg-slate-800 text-slate-500 font-bold text-xs rounded-xl cursor-not-allowed";
                         btnToggle.innerHTML = `<span>낙하 완료</span>`;
                     }
                 }
 
-                const currentBallH = ((ball.position.y - 1) / 18 * 20).toFixed(1);
-                const currentFeatherH = ((feather.position.y - 1) / 18 * 20).toFixed(1);
-                const currentDistX1 = ((ball.position.x + 8) * 1.25).toFixed(1);
-                const currentDistX2 = ((feather.position.x + 8) * 1.25).toFixed(1);
-
                 liveData.innerHTML = `
-                    <div><b>시간 ($t$):</b> ${active3DObjects.t.toFixed(2)}s</div>
-                    <div><b>쇠공:</b> <span class="text-sky-400 font-bold">${currentDistX1}m</span> 이동 | 높이 <span class="text-sky-400 font-bold">${currentBallH}m</span></div>
-                    <div><b>깃털:</b> <span class="text-rose-400 font-bold">${currentDistX2}m</span> 이동 | 높이 <span class="text-rose-400 font-bold">${currentFeatherH}m</span></div>
+                    <div><b>경과 시간 ($t$):</b> ${active3DObjects.t.toFixed(2)}s</div>
+                    <div><b>쇠공 높이:</b> <span class="text-sky-400 font-bold">${((ball.position.y - 0.5) / 17 * 20).toFixed(1)}m</span></div>
+                    <div><b>깃털 높이:</b> <span class="text-rose-400 font-bold">${((featherGroup.position.y - 0.5) / 17 * 20).toFixed(1)}m</span></div>
                 `;
 
                 renderer.render(scene, camera);
             }
-
             drawGraph();
             animate();
         }
 
         /* ====================================================================
-           2. 지구 열수지 시뮬레이션
+           2. 지구 열수지 & 온실효과 (지구 후광 림라이팅 & 복사 파티클 스트림)
            ==================================================================== */
         function setupRadiation3D(ctrl, liveData) {
-            const earthGeo = new THREE.SphereGeometry(4, 32, 32);
-            const earthMat = new THREE.MeshStandardMaterial({ color: 0x10b981, roughness: 0.6 });
+            // Earth Model
+            const earthGeo = new THREE.SphereGeometry(4.5, 32, 32);
+            const earthMat = new THREE.MeshStandardMaterial({
+                color: 0x10b981, roughness: 0.5, metalness: 0.1
+            });
             const earth = new THREE.Mesh(earthGeo, earthMat);
-            earth.position.set(0, 5, 0);
+            earth.position.set(2, 5, 0);
             scene.add(earth);
 
-            const atmoGeo = new THREE.SphereGeometry(5.2, 32, 32);
-            const atmoMat = new THREE.MeshPhysicalMaterial({ color: 0xf43f5e, transparent: true, opacity: 0.2 });
+            // Glowing Atmospheric Layer
+            const atmoGeo = new THREE.SphereGeometry(5.8, 32, 32);
+            const atmoMat = new THREE.MeshPhysicalMaterial({
+                color: 0x38bdf8, transparent: true, opacity: 0.22, roughness: 0.1, transmission: 0.8
+            });
             const atmo = new THREE.Mesh(atmoGeo, atmoMat);
-            atmo.position.set(0, 5, 0);
+            atmo.position.set(2, 5, 0);
             scene.add(atmo);
 
-            const sunGeo = new THREE.SphereGeometry(2, 32, 32);
+            // Sun Sphere
+            const sunGeo = new THREE.SphereGeometry(2.8, 32, 32);
             const sunMat = new THREE.MeshBasicMaterial({ color: 0xf59e0b });
             const sun = new THREE.Mesh(sunGeo, sunMat);
-            sun.position.set(-15, 12, 0);
+            sun.position.set(-16, 12, 0);
             scene.add(sun);
 
-            const state = { co2: 40 };
+            // Sun Corona Ring Glow
+            const coronaGeo = new THREE.RingGeometry(3, 4.5, 32);
+            const coronaMat = new THREE.MeshBasicMaterial({ color: 0xfcb316, side: THREE.DoubleSide, transparent: true, opacity: 0.4 });
+            const corona = new THREE.Mesh(coronaGeo, coronaMat);
+            corona.position.copy(sun.position);
+            corona.lookAt(camera.position);
+            scene.add(corona);
+
+            // Particle System for Radiation Energy Particles
+            const particleCount = 120;
+            const particleGeo = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            for (let i = 0; i < particleCount; i++) {
+                positions[i * 3] = -16 + Math.random() * 18;
+                positions[i * 3 + 1] = 5 + (Math.random() - 0.5) * 6;
+                positions[i * 3 + 2] = (Math.random() - 0.5) * 6;
+            }
+            particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            const particleMat = new THREE.PointsMaterial({ color: 0xfef08a, size: 0.35, transparent: true, opacity: 0.8 });
+            const solarStream = new THREE.Points(particleGeo, particleMat);
+            scene.add(solarStream);
+
+            const state = { greenhouse: 45 };
 
             ctrl.innerHTML = `
                 <div>
                     <div class="flex justify-between text-xs text-slate-300 mb-1">
-                        <span>온실가스 농도</span> <span id="co2Val3D" class="font-bold text-rose-400">40%</span>
+                        <span>온실가스 농도 ($\text{CO}_2$)</span> <span id="ghVal3D" class="font-bold text-rose-400">45 %</span>
                     </div>
-                    <input type="range" id="co2Range3D" min="0" max="100" value="40" class="w-full accent-rose-500">
+                    <input type="range" id="ghRange3D" min="0" max="100" value="45" class="w-full accent-rose-500">
                 </div>
             `;
 
-            document.getElementById('co2Range3D').oninput = (e) => {
-                state.co2 = +e.target.value;
-                document.getElementById('co2Val3D').innerText = state.co2 + '%';
-                atmoMat.opacity = state.co2 / 180;
+            document.getElementById('ghRange3D').oninput = (e) => {
+                state.greenhouse = +e.target.value;
+                document.getElementById('ghVal3D').innerText = state.greenhouse + ' %';
+                atmoMat.opacity = 0.1 + (state.greenhouse / 100) * 0.45;
+                atmoMat.color.setHSL(0.55 - (state.greenhouse / 100) * 0.55, 0.9, 0.5);
             };
 
             function animate() {
                 animFrameId = requestAnimationFrame(animate);
                 controls.update();
-                earth.rotation.y += 0.005;
+                earth.rotation.y += 0.004;
+                corona.lookAt(camera.position);
 
+                // Animate Radiation Particles moving toward Earth
+                const pos = solarStream.geometry.attributes.position.array;
+                for (let i = 0; i < particleCount; i++) {
+                    pos[i * 3] += 0.25;
+                    if (pos[i * 3] > 2) pos[i * 3] = -16;
+                }
+                solarStream.geometry.attributes.position.needsUpdate = true;
+
+                const estTemp = (14 + state.greenhouse * 0.18).toFixed(1);
                 liveData.innerHTML = `
-                    <div><b>대기 온실가스 농도:</b> ${state.co2}%</div>
-                    <div><b>지구 평균 추정기온:</b> ${(14 + state.co2 * 0.15).toFixed(1)} °C</div>
+                    <div><b>대기 온실가스 농도:</b> ${state.greenhouse}%</div>
+                    <div><b>지표 흡수 복사에너지:</b> ${100 - Math.round(state.greenhouse * 0.2)} W/m²</div>
+                    <div><b>지구 평균 기온:</b> <span class="text-amber-400 font-bold">${estTemp} °C</span></div>
                 `;
 
                 renderer.render(scene, camera);
@@ -860,60 +946,105 @@
         }
 
         /* ====================================================================
-           3. 중화반응
+           3. 산·염기 중화 적정 (마그네틱 교반기 & 적정 방울 애니메이션)
            ==================================================================== */
         function setupTitration3D(ctrl, liveData) {
-            const flaskGeo = new THREE.ConeGeometry(3, 5, 32);
+            // Magnetic Stirrer Base
+            const stirrerGeo = new THREE.BoxGeometry(7, 1.2, 7);
+            const stirrerMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.7, roughness: 0.3 });
+            const stirrer = new THREE.Mesh(stirrerGeo, stirrerMat);
+            stirrer.position.set(0, 0.6, 0);
+            scene.add(stirrer);
+
+            // Flask Glass
+            const flaskGeo = new THREE.ConeGeometry(3.2, 5.5, 32, 1, true);
             const flaskMat = new THREE.MeshPhysicalMaterial({
-                color: 0xffffff, transparent: true, opacity: 0.4, transmission: 0.8
+                color: 0xffffff, transparent: true, opacity: 0.35, transmission: 0.9, roughness: 0.05
             });
             const flask = new THREE.Mesh(flaskGeo, flaskMat);
-            flask.position.set(0, 2.5, 0);
+            flask.position.set(0, 3.8, 0);
             scene.add(flask);
 
-            const liquidGeo = new THREE.CylinderGeometry(2, 2.8, 2.5, 32);
-            const liquidMat = new THREE.MeshStandardMaterial({ color: 0xeab308, transparent: true, opacity: 0.8 });
+            // Liquid inside Flask
+            const liquidGeo = new THREE.CylinderGeometry(2.1, 3.1, 2.6, 32);
+            const liquidMat = new THREE.MeshStandardMaterial({ color: 0xeab308, transparent: true, opacity: 0.85 });
             const liquid = new THREE.Mesh(liquidGeo, liquidMat);
-            liquid.position.set(0, 1.3, 0);
+            liquid.position.set(0, 2.5, 0);
             scene.add(liquid);
 
-            const burGeo = new THREE.CylinderGeometry(0.3, 0.3, 12, 16);
-            const burMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.8 });
-            const bur = new THREE.Mesh(burGeo, burMat);
-            bur.position.set(0, 12, 0);
-            scene.add(bur);
+            // Magnetic Stir Bar
+            const barGeo = new THREE.CapsuleGeometry ? new THREE.CapsuleGeometry(0.18, 1.2, 8, 16) : new THREE.CylinderGeometry(0.18, 0.18, 1.2, 16);
+            const barMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.2 });
+            const stirBar = new THREE.Mesh(barGeo, barMat);
+            stirBar.rotation.x = Math.PI / 2;
+            stirBar.position.set(0, 1.4, 0);
+            scene.add(stirBar);
 
-            const state = { baseVol: 0 };
+            // Burette Metallic Stand & Glass Burette Column
+            const buretteGeo = new THREE.CylinderGeometry(0.35, 0.35, 12, 24);
+            const buretteMat = new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: 0.5, transmission: 0.8 });
+            const burette = new THREE.Mesh(buretteGeo, buretteMat);
+            burette.position.set(0, 13.5, 0);
+            scene.add(burette);
+
+            // Falling Drop Particle
+            const dropGeo = new THREE.SphereGeometry(0.15, 16, 16);
+            const dropMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+            const drop = new THREE.Mesh(dropGeo, dropMat);
+            drop.position.set(0, 7.5, 0);
+            drop.visible = false;
+            scene.add(drop);
+
+            const state = { baseVol: 0, dropping: false };
 
             ctrl.innerHTML = `
                 <div>
                     <div class="flex justify-between text-xs text-slate-300 mb-1">
-                        <span>NaOH 적정량</span> <span id="naohVol3D" class="font-bold text-emerald-400">0 mL</span>
+                        <span>$\text{NaOH}$ 적정 적하량</span> <span id="volVal3D" class="font-bold text-emerald-400">0.0 mL</span>
                     </div>
-                    <input type="range" id="naohRange3D" min="0" max="100" value="0" class="w-full accent-emerald-500">
+                    <input type="range" id="volRange3D" min="0" max="100" value="0" step="0.5" class="w-full accent-emerald-500">
                 </div>
             `;
 
-            document.getElementById('naohRange3D').oninput = (e) => {
+            document.getElementById('volRange3D').oninput = (e) => {
                 state.baseVol = +e.target.value;
-                document.getElementById('naohVol3D').innerText = state.baseVol + ' mL';
+                document.getElementById('volVal3D').innerText = state.baseVol.toFixed(1) + ' mL';
 
+                // BTB Color Change (Yellow -> Emerald Green -> Blue)
                 if (state.baseVol < 48) {
-                    liquidMat.color.setHex(0xeab308); // Yellow (Acidic)
+                    liquidMat.color.setHex(0xeab308); // Acidic Yellow
                 } else if (state.baseVol <= 52) {
-                    liquidMat.color.setHex(0x10b981); // Green (Neutral)
+                    liquidMat.color.setHex(0x10b981); // Neutral Green
                 } else {
-                    liquidMat.color.setHex(0x3b82f6); // Blue (Basic)
+                    liquidMat.color.setHex(0x3b82f6); // Basic Blue
                 }
+
+                // Trigger drop animation
+                drop.visible = true;
+                drop.position.y = 7.5;
             };
 
             function animate() {
                 animFrameId = requestAnimationFrame(animate);
                 controls.update();
 
+                // Rotate magnetic stir bar inside flask
+                stirBar.rotation.z += 0.2;
+
+                if (drop.visible) {
+                    drop.position.y -= 0.25;
+                    if (drop.position.y <= 3.6) {
+                        drop.position.y = 7.5;
+                        drop.visible = false;
+                    }
+                }
+
+                const pH = state.baseVol < 50 ? (2 + state.baseVol * 0.1).toFixed(1) : (7 + (state.baseVol - 50) * 0.12).toFixed(1);
+
                 liveData.innerHTML = `
-                    <div><b>NaOH 적정량:</b> ${state.baseVol} mL</div>
-                    <div><b>반응 상태:</b> ${state.baseVol >= 48 && state.baseVol <= 52 ? '✅ 중화점 도달' : '적정 진행 중'}</div>
+                    <div><b>$\text{NaOH}$ 적정량:</b> ${state.baseVol.toFixed(1)} mL</div>
+                    <div><b>용액 추정 pH:</b> <span class="text-cyan-400 font-bold">${pH}</span></div>
+                    <div><b>중화 반응 상태:</b> ${Math.abs(state.baseVol - 50) <= 2 ? '✅ [중화점 완충 도달]' : '산/염기 진행 중'}</div>
                 `;
 
                 renderer.render(scene, camera);
@@ -922,52 +1053,75 @@
         }
 
         /* ====================================================================
-           4. 소화효소를 이용한 영양소 분해 실험
+           4. 소화효소 & 분자 기질 분해 (디지털 수조 & 기질 파티클 애니메이션)
            ==================================================================== */
         function setupEnzyme3D(ctrl, liveData) {
-            const bathGeo = new THREE.BoxGeometry(10, 5, 8);
-            const bathMat = new THREE.MeshPhysicalMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.4 });
+            // Digital Waterbath Container
+            const bathGeo = new THREE.BoxGeometry(12, 5, 8);
+            const bathMat = new THREE.MeshPhysicalMaterial({ color: 0x0284c7, transparent: true, opacity: 0.35, roughness: 0.1 });
             const bath = new THREE.Mesh(bathGeo, bathMat);
             bath.position.set(0, 2.5, 0);
             scene.add(bath);
 
-            const tubeGeo = new THREE.CylinderGeometry(0.8, 0.8, 6, 16);
-            const tubeMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, transparent: true, opacity: 0.7 });
-            const tube1 = new THREE.Mesh(tubeGeo, tubeMat);
-            tube1.position.set(-2, 4, 0);
-            scene.add(tube1);
+            // Metallic Heating Element Rim
+            const rimGeo = new THREE.BoxGeometry(12.4, 0.4, 8.4);
+            const rimMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.8 });
+            const rim = new THREE.Mesh(rimGeo, rimMat);
+            rim.position.set(0, 5, 0);
+            scene.add(rim);
+
+            // Test Tube
+            const tubeGeo = new THREE.CylinderGeometry(0.8, 0.8, 6.5, 24);
+            const tubeMat = new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: 0.5, transmission: 0.85 });
+            const tube = new THREE.Mesh(tubeGeo, tubeMat);
+            tube.position.set(0, 4.5, 0);
+            scene.add(tube);
+
+            // Substrate Particles inside Test Tube
+            const pGroup = new THREE.Group();
+            for (let i = 0; i < 20; i++) {
+                const p = new THREE.Mesh(new THREE.SphereGeometry(0.12, 8, 8), new THREE.MeshBasicMaterial({ color: 0xf59e0b }));
+                p.position.set((Math.random() - 0.5) * 1, 2 + Math.random() * 3, (Math.random() - 0.5) * 1);
+                pGroup.add(p);
+            }
+            scene.add(pGroup);
 
             const state = { temp: 37 };
 
             ctrl.innerHTML = `
                 <div>
                     <div class="flex justify-between text-xs text-slate-300 mb-1">
-                        <span>항온 수조 온도</span> <span id="bathTemp3D" class="font-bold text-rose-400">37 °C</span>
+                        <span>항온 수조 설정 온도</span> <span id="tempVal3D" class="font-bold text-rose-400">37 °C</span>
                     </div>
-                    <input type="range" id="bathTempRange3D" min="0" max="80" value="37" class="w-full accent-rose-500">
+                    <input type="range" id="tempRange3D" min="0" max="80" value="37" class="w-full accent-rose-500">
                 </div>
             `;
 
-            document.getElementById('bathTempRange3D').oninput = (e) => {
+            document.getElementById('tempRange3D').oninput = (e) => {
                 state.temp = +e.target.value;
-                document.getElementById('bathTemp3D').innerText = state.temp + ' °C';
-
-                if (state.temp > 60) {
-                    tubeMat.color.setHex(0xef4444); // Red Denatured
-                } else if (state.temp >= 35 && state.temp <= 42) {
-                    tubeMat.color.setHex(0x10b981); // Green digested
-                } else {
-                    tubeMat.color.setHex(0xf59e0b);
-                }
+                document.getElementById('tempVal3D').innerText = state.temp + ' °C';
             };
 
             function animate() {
                 animFrameId = requestAnimationFrame(animate);
                 controls.update();
 
+                // Particle brownian motion based on temp
+                const speed = state.temp / 800;
+                pGroup.children.forEach(p => {
+                    p.position.x += (Math.random() - 0.5) * speed;
+                    p.position.y += (Math.random() - 0.5) * speed;
+                    if (p.position.y < 2) p.position.y = 2.5;
+                    if (p.position.y > 5) p.position.y = 4.5;
+                });
+
+                let statusText = "저온 (효소 활성 저하)";
+                if (state.temp >= 35 && state.temp <= 42) statusText = "✅ [최적 입체 구조 및 최대 분해 활성]";
+                else if (state.temp > 55) statusText = "❌ [열에 의한 단백질 열변성 비활성화]";
+
                 liveData.innerHTML = `
-                    <div><b>수조 온도:</b> ${state.temp} °C</div>
-                    <div><b>효소 상태:</b> ${state.temp > 60 ? '❌ 고온 변성' : (state.temp >= 35 && state.temp <= 42 ? '✅ 최적 영양소 분해' : '저온 저활성')}</div>
+                    <div><b>수조 설정 온도:</b> ${state.temp} °C</div>
+                    <div><b>효소 분자 상태:</b> ${statusText}</div>
                 `;
 
                 renderer.render(scene, camera);
@@ -976,45 +1130,71 @@
         }
 
         /* ====================================================================
-           5. 화학 평형 (이동)
+           5. 동적 화학 평형 & 압력 피스톤 (기계식 크랭크 & 기체 파티클 시뮬레이션)
            ==================================================================== */
         function setupEquilibrium3D(ctrl, liveData) {
-            const cylGeo = new THREE.CylinderGeometry(3, 3, 10, 32, 1, true);
-            const cylMat = new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: 0.3 });
-            const cyl = new THREE.Mesh(cylGeo, cylMat);
-            cyl.position.set(0, 5, 0);
-            scene.add(cyl);
+            // Glass Cylinder
+            const cylGeo = new THREE.CylinderGeometry(3.2, 3.2, 10, 32, 1, true);
+            const cylMat = new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: 0.3, transmission: 0.9 });
+            const cylinder = new THREE.Mesh(cylGeo, cylMat);
+            cylinder.position.set(0, 5.5, 0);
+            scene.add(cylinder);
 
-            const pisGeo = new THREE.CylinderGeometry(2.9, 2.9, 0.5, 32);
-            const pisMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.8 });
-            const piston = new THREE.Mesh(pisGeo, pisMat);
-            piston.position.set(0, 9, 0);
+            // Metallic Piston
+            const pistonGeo = new THREE.CylinderGeometry(3.1, 3.1, 0.8, 32);
+            const pistonMat = new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.8, roughness: 0.2 });
+            const piston = new THREE.Mesh(pistonGeo, pistonMat);
+            piston.position.set(0, 9.5, 0);
             scene.add(piston);
 
-            const state = { press: 1 };
+            // Gas Particles inside Cylinder
+            const particleCount = 60;
+            const gasGroup = new THREE.Group();
+            for (let i = 0; i < particleCount; i++) {
+                const p = new THREE.Mesh(new THREE.SphereGeometry(0.18, 8, 8), new THREE.MeshBasicMaterial({ color: 0xd97706 }));
+                p.position.set((Math.random() - 0.5) * 5, 1 + Math.random() * 8, (Math.random() - 0.5) * 5);
+                gasGroup.add(p);
+            }
+            scene.add(gasGroup);
+
+            const state = { pressure: 1.0 };
 
             ctrl.innerHTML = `
                 <div>
                     <div class="flex justify-between text-xs text-slate-300 mb-1">
-                        <span>계의 압력</span> <span id="pressVal3D" class="font-bold text-amber-400">1 atm</span>
+                        <span>실린더 내부 압력</span> <span id="pressVal3D" class="font-bold text-amber-400">1.0 atm</span>
                     </div>
-                    <input type="range" id="pressRange3D" min="1" max="5" value="1" step="0.1" class="w-full accent-amber-500">
+                    <input type="range" id="pressRange3D" min="1" max="4" value="1" step="0.1" class="w-full accent-amber-500">
                 </div>
             `;
 
             document.getElementById('pressRange3D').oninput = (e) => {
-                state.press = +e.target.value;
-                document.getElementById('pressVal3D').innerText = state.press + ' atm';
-                piston.position.y = 9 - (state.press - 1) * 1.5;
+                state.pressure = +e.target.value;
+                document.getElementById('pressVal3D').innerText = state.pressure.toFixed(1) + ' atm';
+
+                // Piston moves down with pressure
+                piston.position.y = 9.5 - (state.pressure - 1) * 1.8;
+
+                // Color shift of gas particles ($NO_2$ dark brown vs $N_2O_4$ colorless)
+                const col = new THREE.Color().setHSL(0.08, 0.9, 0.6 - (state.pressure - 1) * 0.12);
+                gasGroup.children.forEach(p => p.material.color.copy(col));
             };
 
             function animate() {
                 animFrameId = requestAnimationFrame(animate);
                 controls.update();
 
+                const maxY = piston.position.y - 0.5;
+                gasGroup.children.forEach(p => {
+                    p.position.x += (Math.random() - 0.5) * 0.08 * state.pressure;
+                    p.position.y += (Math.random() - 0.5) * 0.08 * state.pressure;
+                    if (p.position.y > maxY) p.position.y = maxY - 0.2;
+                    if (p.position.y < 1) p.position.y = 1.2;
+                });
+
                 liveData.innerHTML = `
-                    <div><b>계의 압력:</b> ${state.press} atm</div>
-                    <div><b>평형 이동:</b> ${state.press > 2 ? '👉 정반응 이동 (생성물 증가)' : '⚖️ 동적 평형 유지'}</div>
+                    <div><b>계의 압력:</b> ${state.pressure.toFixed(1)} atm</div>
+                    <div><b>르샤틀리에 평형 이동:</b> ${state.pressure > 1.8 ? '👉 [정반응 이동: $2\text{NO}_2 \rightarrow \text{N}_2\text{O}_4$]' : '⚖️ [동적 평형 유지]'}</div>
                 `;
 
                 renderer.render(scene, camera);
@@ -1023,70 +1203,426 @@
         }
 
         /* ====================================================================
-           6. 볼록렌즈의 상의 변화
+           6. 볼록렌즈 광학대 & 3D 상 형성 (광선 추적 & 스크린 실시간 도립 상 투영)
            ==================================================================== */
         function setupLens3D(ctrl, liveData) {
-            const railGeo = new THREE.BoxGeometry(24, 0.4, 1);
-            const railMat = new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.8 });
+            // Calibrated Optical Bench Rail
+            const railGeo = new THREE.BoxGeometry(26, 0.4, 1.2);
+            const railMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.8 });
             const rail = new THREE.Mesh(railGeo, railMat);
             rail.position.set(0, 0.2, 0);
             scene.add(rail);
 
-            const lensGeo = new THREE.CylinderGeometry(2, 2, 0.3, 32);
-            const lensMat = new THREE.MeshPhysicalMaterial({ color: 0xa855f7, transparent: true, opacity: 0.6, transmission: 0.9 });
+            // Optical Axis (광축 - y = 2.8, z = 0)
+            const axisGeo = new THREE.BufferGeometry().setFromPoints([
+                new THREE.Vector3(-12.5, 2.8, 0),
+                new THREE.Vector3(12.5, 2.8, 0)
+            ]);
+            const axisMat = new THREE.LineDashedMaterial({ color: 0x64748b, dashSize: 0.4, gapSize: 0.2 });
+            const opticalAxis = new THREE.Line(axisGeo, axisMat);
+            opticalAxis.computeLineDistances();
+            scene.add(opticalAxis);
+
+            // Lens Principal Plane (렌즈 주평면 x = 0 가이드)
+            const planeGeo = new THREE.PlaneGeometry(7, 7);
+            const planeMat = new THREE.MeshBasicMaterial({ color: 0xa855f7, transparent: true, opacity: 0.08, side: THREE.DoubleSide });
+            const principalPlane = new THREE.Mesh(planeGeo, planeMat);
+            principalPlane.position.set(0, 2.8, 0);
+            scene.add(principalPlane);
+
+            // Convex Glass Lens
+            const lensGeo = new THREE.CylinderGeometry(2.5, 2.5, 0.35, 32);
+            const lensMat = new THREE.MeshPhysicalMaterial({ color: 0xc084fc, transparent: true, opacity: 0.6, transmission: 0.95, roughness: 0.05 });
             const lens = new THREE.Mesh(lensGeo, lensMat);
-            lens.rotation.x = Math.PI / 2;
-            lens.position.set(0, 2.5, 0);
+            lens.rotation.z = Math.PI / 2;
+            lens.position.set(0, 2.8, 0);
             scene.add(lens);
 
-            const candleGeo = new THREE.CylinderGeometry(0.4, 0.4, 3, 16);
-            const candleMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b });
-            const candle = new THREE.Mesh(candleGeo, candleMat);
-            candle.position.set(-8, 1.7, 0);
-            scene.add(candle);
+            // Lens Holder Stand
+            const holderGeo = new THREE.CylinderGeometry(0.12, 0.12, 2.6, 16);
+            const holderMat = new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.8 });
+            const holder = new THREE.Mesh(holderGeo, holderMat);
+            holder.position.set(0, 1.3, 0);
+            scene.add(holder);
 
-            const scrGeo = new THREE.BoxGeometry(0.2, 4, 3);
-            const scrMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0 });
-            const screen = new THREE.Mesh(scrGeo, scrMat);
-            screen.position.set(8, 2.2, 0);
+            // Optical Screen (초 전체 상을 온전히 담기도록 스크린 크기 확장)
+            const screenGeo = new THREE.BoxGeometry(0.15, 6.8, 4.8);
+            const screenMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.9 });
+            const screen = new THREE.Mesh(screenGeo, screenMat);
+            screen.position.set(8, 2.8, 0);
             scene.add(screen);
 
-            const state = { doDist: 8, scrPos: 8 };
+            // Real Object Candle (물체: 초 몸통 + 심지 + 불꽃)
+            const candleGroup = new THREE.Group();
+            
+            const bodyMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.4 });
+            const body = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 1.8, 24), bodyMat);
+            body.position.y = 0.9;
+            candleGroup.add(body);
+
+            const wick = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.1, 8), new THREE.MeshStandardMaterial({ color: 0x1e293b }));
+            wick.position.y = 1.85;
+            candleGroup.add(wick);
+
+            const flameMat = new THREE.MeshBasicMaterial({ color: 0xef4444 });
+            const flame = new THREE.Mesh(new THREE.ConeGeometry(0.18, 0.55, 16), flameMat);
+            flame.position.y = 2.125;
+            candleGroup.add(flame);
+
+            const flameInner = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.35, 16), new THREE.MeshBasicMaterial({ color: 0xfef08a }));
+            flameInner.position.y = 2.05;
+            candleGroup.add(flameInner);
+
+            candleGroup.position.set(-8, 2.8, 0);
+            scene.add(candleGroup);
+
+            // Projected Inverted Candle on Screen (스크린 실상: 도립된 초 몸통 + 심지 + 불꽃 전체)
+            const projCandleGroup = new THREE.Group();
+
+            const projBodyMat = new THREE.MeshStandardMaterial({ color: 0xd97706, roughness: 0.5, transparent: true, opacity: 1 });
+            const projWickMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, transparent: true, opacity: 1 });
+            const projFlameMat = new THREE.MeshBasicMaterial({ color: 0xef4444, transparent: true, opacity: 1 });
+            const projFlameInnerMat = new THREE.MeshBasicMaterial({ color: 0xfef08a, transparent: true, opacity: 1 });
+
+            const projBody = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 1.8, 24), projBodyMat);
+            projBody.position.y = -0.9;
+            projCandleGroup.add(projBody);
+
+            const projWick = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.1, 8), projWickMat);
+            projWick.position.y = -1.85;
+            projCandleGroup.add(projWick);
+
+            const projFlame = new THREE.Mesh(new THREE.ConeGeometry(0.18, 0.55, 16), projFlameMat);
+            projFlame.rotation.z = Math.PI;
+            projFlame.position.y = -2.125;
+            projCandleGroup.add(projFlame);
+
+            const projFlameInner = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.35, 16), projFlameInnerMat);
+            projFlameInner.rotation.z = Math.PI;
+            projFlameInner.position.y = -2.05;
+            projCandleGroup.add(projFlameInner);
+
+            projCandleGroup.position.set(8.08, 2.8, 0);
+            scene.add(projCandleGroup);
+
+            // Virtual Image Candle (허상: 정립 확대 초 전체)
+            const virtCandleGroup = new THREE.Group();
+            const virtMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.45 });
+            const virtBody = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 1.8, 24), virtMat);
+            virtBody.position.y = 0.9;
+            virtCandleGroup.add(virtBody);
+
+            const virtWick = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.1, 8), new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.6 }));
+            virtWick.position.y = 1.85;
+            virtCandleGroup.add(virtWick);
+
+            const virtFlame = new THREE.Mesh(new THREE.ConeGeometry(0.18, 0.55, 16), new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.7 }));
+            virtFlame.position.y = 2.125;
+            virtCandleGroup.add(virtFlame);
+
+            virtCandleGroup.position.set(-8, 2.8, 0);
+            virtCandleGroup.visible = false;
+            scene.add(virtCandleGroup);
+
+            // Focal Points Group (F1, F2, 2F1, 2F2)
+            const focalGroup = new THREE.Group();
+            scene.add(focalGroup);
+
+            const fDist = 4.0;
+            const focalPositions = [
+                { x: -fDist, label: "F1", color: 0x10b981 },
+                { x: fDist, label: "F2", color: 0x10b981 },
+                { x: -2 * fDist, label: "2F1", color: 0x06b6d4 },
+                { x: 2 * fDist, label: "2F2", color: 0x06b6d4 }
+            ];
+
+            focalPositions.forEach(fp => {
+                const pole = new THREE.Mesh(
+                    new THREE.CylinderGeometry(0.06, 0.06, 1.2, 16),
+                    new THREE.MeshStandardMaterial({ color: fp.color, roughness: 0.3, metalness: 0.6 })
+                );
+                pole.position.set(fp.x, 0.8, 0);
+                focalGroup.add(pole);
+
+                const sphere = new THREE.Mesh(
+                    new THREE.SphereGeometry(0.2, 16, 16),
+                    new THREE.MeshBasicMaterial({ color: fp.color })
+                );
+                sphere.position.set(fp.x, 1.4, 0);
+                focalGroup.add(sphere);
+            });
+
+            // 3D Optical Laser Rays Master Group
+            const raysMasterGroup = new THREE.Group();
+            scene.add(raysMasterGroup);
+
+            const state = {
+                doDist: 8.0,
+                diDist: 8.0,
+                showRays: true,
+                showFocal: true,
+                focalLength: 4.0
+            };
+
+            // Helper function: Build glowing 3D laser ray segment with directional arrow cone
+            function buildRaySegment(p1, p2, colorHex, isDashed = false) {
+                const grp = new THREE.Group();
+                const dir = new THREE.Vector3().subVectors(p2, p1);
+                const len = dir.length();
+                if (len < 0.05) return grp;
+
+                if (!isDashed) {
+                    const tubeGeo = new THREE.CylinderGeometry(0.035, 0.035, len, 8);
+                    const tubeMat = new THREE.MeshBasicMaterial({ color: colorHex, transparent: true, opacity: 0.88 });
+                    const tube = new THREE.Mesh(tubeGeo, tubeMat);
+                    tube.position.copy(p1).add(p2).multiplyScalar(0.5);
+                    tube.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
+                    grp.add(tube);
+
+                    const coneGeo = new THREE.ConeGeometry(0.12, 0.35, 12);
+                    const coneMat = new THREE.MeshBasicMaterial({ color: colorHex });
+                    const arrow = new THREE.Mesh(coneGeo, coneMat);
+                    arrow.position.copy(p1).add(p2).multiplyScalar(0.5);
+                    arrow.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
+                    grp.add(arrow);
+                } else {
+                    const lineGeo = new THREE.BufferGeometry().setFromPoints([p1, p2]);
+                    const lineMat = new THREE.LineDashedMaterial({ color: colorHex, dashSize: 0.3, gapSize: 0.15, transparent: true, opacity: 0.65 });
+                    const line = new THREE.Line(lineGeo, lineMat);
+                    line.computeLineDistances();
+                    grp.add(line);
+                }
+                return grp;
+            }
+
+            function updateRays() {
+                while (raysMasterGroup.children.length > 0) {
+                    const child = raysMasterGroup.children[0];
+                    raysMasterGroup.remove(child);
+                }
+
+                const yL = 2.8;              // 광축 높이
+                const h_o = 2.4;            // 물체(초 전체 높이: 촛대 1.8 + 불꽃 0.6)
+                const f = state.focalLength; // 초점거리 4.0cm
+                const d_o = state.doDist;     // 물체 거리
+                const x_R = 12.0;            // 우측 경계
+
+                const P0 = new THREE.Vector3(-d_o, yL + h_o, 0); // 물체 불꽃 팁 좌표
+
+                if (state.showRays) {
+                    // 🟡 1번 광선 (평행 광선)
+                    const A1 = new THREE.Vector3(0, yL + h_o, 0);
+                    const ray1_seg1 = buildRaySegment(P0, A1, 0xfacc15);
+                    const slope1 = -h_o / f;
+                    const B1 = new THREE.Vector3(x_R, yL + h_o + slope1 * x_R, 0);
+                    const ray1_seg2 = buildRaySegment(A1, B1, 0xfacc15);
+                    raysMasterGroup.add(ray1_seg1);
+                    raysMasterGroup.add(ray1_seg2);
+
+                    // 🔴 2번 광선 (중심 광선)
+                    const slope2 = -h_o / d_o;
+                    const B2 = new THREE.Vector3(x_R, yL + slope2 * x_R, 0);
+                    const ray2_seg = buildRaySegment(P0, B2, 0xf43f5e);
+                    raysMasterGroup.add(ray2_seg);
+
+                    // 🔵 3번 광선 (초점 광선)
+                    if (Math.abs(d_o - f) > 0.15) {
+                        if (d_o > f) {
+                            const slope3 = -h_o / (d_o - f);
+                            const y_lens3 = yL + slope3 * f;
+                            const A3 = new THREE.Vector3(0, y_lens3, 0);
+                            const B3 = new THREE.Vector3(x_R, y_lens3, 0);
+
+                            const ray3_seg1 = buildRaySegment(P0, A3, 0x06b6d4);
+                            const ray3_seg2 = buildRaySegment(A3, B3, 0x06b6d4);
+                            raysMasterGroup.add(ray3_seg1);
+                            raysMasterGroup.add(ray3_seg2);
+                        } else {
+                            const slope3 = h_o / (f - d_o);
+                            const y_lens3 = yL + slope3 * f;
+                            const A3 = new THREE.Vector3(0, y_lens3, 0);
+                            const B3 = new THREE.Vector3(x_R, y_lens3, 0);
+
+                            const ray3_seg1 = buildRaySegment(P0, A3, 0x06b6d4);
+                            const ray3_seg2 = buildRaySegment(A3, B3, 0x06b6d4);
+                            raysMasterGroup.add(ray3_seg1);
+                            raysMasterGroup.add(ray3_seg2);
+
+                            const d_i_virt = (f * d_o) / (f - d_o);
+                            const h_i_virt = h_o * (f / (f - d_o));
+                            const P_virt = new THREE.Vector3(-d_i_virt, yL + h_i_virt, 0);
+
+                            const virt1 = buildRaySegment(A1, P_virt, 0xfacc15, true);
+                            const virt2 = buildRaySegment(new THREE.Vector3(0, yL, 0), P_virt, 0xf43f5e, true);
+                            const virt3 = buildRaySegment(A3, P_virt, 0x06b6d4, true);
+
+                            raysMasterGroup.add(virt1);
+                            raysMasterGroup.add(virt2);
+                            raysMasterGroup.add(virt3);
+                        }
+                    }
+                }
+
+                // 초 상(Candle Image) 3D 모델 실시간 매핑
+                if (d_o > f) {
+                    // 실상 (Inverted Real Image: 초 몸통, 심지, 불꽃이 함께 투영)
+                    virtCandleGroup.visible = false;
+                    const idealDi = (f * d_o) / (d_o - f);
+                    const mag = idealDi / d_o;
+                    const focusDiff = Math.abs(state.diDist - idealDi);
+
+                    // 초점 유효 감응 범위 (3.8cm 내외에서 연속적인 초점 이탈 및 번짐 표현)
+                    const maxBlurRange = 3.8;
+                    if (focusDiff < maxBlurRange) {
+                        projCandleGroup.visible = true;
+                        
+                        // 초점 일치율 (1.0 = 완전 또렷함, 0.0 = 완전히 흐려짐)
+                        const focusFactor = Math.pow(Math.max(0, 1 - focusDiff / maxBlurRange), 1.4);
+                        // 초점이 맞지 않을수록 상 크기가 살짝 번지고 확대되는 현상
+                        const blurSpread = 1 + (1 - focusFactor) * 0.35;
+
+                        projCandleGroup.scale.set(mag * blurSpread, mag * blurSpread, mag * blurSpread);
+                        projCandleGroup.position.set(state.diDist + 0.08, yL, 0);
+
+                        // 투명도 조절로 흐림/또렷함 연출
+                        projBodyMat.opacity = focusFactor * 0.95;
+                        projWickMat.opacity = focusFactor * 0.95;
+                        projFlameMat.opacity = focusFactor * 0.98;
+                        projFlameInnerMat.opacity = focusFactor * 0.98;
+                    } else {
+                        projCandleGroup.visible = false;
+                    }
+                } else if (d_o < f) {
+                    // 허상 (Upright Virtual Image)
+                    projCandleGroup.visible = false;
+                    const d_i_virt = (f * d_o) / (f - d_o);
+                    const mag = d_i_virt / d_o;
+                    virtCandleGroup.visible = true;
+                    virtCandleGroup.scale.set(mag, mag, mag);
+                    virtCandleGroup.position.set(-d_i_virt, yL, 0);
+                } else {
+                    // d_o = f (상 미형성)
+                    projCandleGroup.visible = false;
+                    virtCandleGroup.visible = false;
+                }
+            }
 
             ctrl.innerHTML = `
-                <div>
-                    <div class="flex justify-between text-xs text-slate-300 mb-1">
-                        <span>촛불 위치 거리 ($d_o$)</span> <span id="candleDist3D" class="font-bold text-indigo-400">8 cm</span>
-                    </div>
-                    <input type="range" id="candleRange3D" min="3" max="11" value="8" step="0.1" class="w-full accent-indigo-500">
+                <div class="grid grid-cols-2 gap-2 mb-3">
+                    <button id="btnRaysToggleSwitch" class="w-full py-2 bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-purple-500 shadow transition">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>광선 추적 ON</span>
+                    </button>
+                    <button id="btnFocalToggleSwitch" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-emerald-500 shadow transition">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>초점(F) 표시 ON</span>
+                    </button>
                 </div>
+
+                <div class="p-2.5 bg-slate-950/80 rounded-xl border border-slate-800 text-[11px] space-y-1 mb-3">
+                    <div class="font-bold text-slate-300 mb-1 flex items-center gap-1">
+                        <i class="fa-solid fa-circle-info text-purple-400"></i> 교과서 렌즈 광선 추적 범례:
+                    </div>
+                    <div class="text-amber-300">🟡 <b>1번 (평행광선)</b>: 광축 평행 $\rightarrow$ $F_2$ 초점 통과</div>
+                    <div class="text-rose-400">🔴 <b>2번 (중심광선)</b>: 렌즈 중심 $O$ 굴절 없이 직진</div>
+                    <div class="text-cyan-300">🔵 <b>3번 (초점광선)</b>: $F_1$ 초점 통과 $\rightarrow$ 광축 평행</div>
+                </div>
+
                 <div>
                     <div class="flex justify-between text-xs text-slate-300 mb-1">
-                        <span>스크린 위치 거리</span> <span id="screenDist3D" class="font-bold text-blue-400">8 cm</span>
+                        <span>촛불 위치 거리 ($d_o$)</span> <span id="doVal3D" class="font-bold text-indigo-400">8.0 cm</span>
                     </div>
-                    <input type="range" id="screenRange3D" min="3" max="11" value="8" step="0.1" class="w-full accent-blue-500">
+                    <input type="range" id="doRange3D" min="2.0" max="11.0" value="8.0" step="0.1" class="w-full accent-indigo-500">
+                </div>
+
+                <div>
+                    <div class="flex justify-between text-xs text-slate-300 mb-1">
+                        <span>스크린 위치 거리 ($d_i$)</span> <span id="diVal3D" class="font-bold text-blue-400">8.0 cm</span>
+                    </div>
+                    <input type="range" id="diRange3D" min="2.0" max="15.0" value="8.0" step="0.1" class="w-full accent-blue-500">
                 </div>
             `;
 
-            document.getElementById('candleRange3D').oninput = (e) => {
-                state.doDist = +e.target.value;
-                document.getElementById('candleDist3D').innerText = state.doDist + ' cm';
-                candle.position.x = -state.doDist;
+            const btnRays = document.getElementById('btnRaysToggleSwitch');
+            btnRays.onclick = function() {
+                state.showRays = !state.showRays;
+                this.className = state.showRays ?
+                    "w-full py-2 bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-purple-500 shadow transition" :
+                    "w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-400 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-slate-700 transition";
+                this.innerHTML = state.showRays ?
+                    `<i class="fa-solid fa-bolt"></i> <span>광선 추적 ON</span>` :
+                    `<i class="fa-solid fa-eye-slash"></i> <span>광선 추적 OFF</span>`;
+                updateRays();
             };
 
-            document.getElementById('screenRange3D').oninput = (e) => {
-                state.scrPos = +e.target.value;
-                document.getElementById('screenDist3D').innerText = state.scrPos + ' cm';
-                screen.position.x = state.scrPos;
+            const btnFocal = document.getElementById('btnFocalToggleSwitch');
+            btnFocal.onclick = function() {
+                state.showFocal = !state.showFocal;
+                focalGroup.visible = state.showFocal;
+                this.className = state.showFocal ?
+                    "w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-emerald-500 shadow transition" :
+                    "w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-400 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 border border-slate-700 transition";
+                this.innerHTML = state.showFocal ?
+                    `<i class="fa-solid fa-location-dot"></i> <span>초점(F) 표시 ON</span>` :
+                    `<i class="fa-solid fa-eye-slash"></i> <span>초점(F) 표시 OFF</span>`;
             };
+
+            document.getElementById('doRange3D').oninput = (e) => {
+                state.doDist = +e.target.value;
+                document.getElementById('doVal3D').innerText = state.doDist.toFixed(1) + ' cm';
+                candleGroup.position.x = -state.doDist;
+                updateRays();
+            };
+
+            document.getElementById('diRange3D').oninput = (e) => {
+                state.diDist = +e.target.value;
+                document.getElementById('diVal3D').innerText = state.diDist.toFixed(1) + ' cm';
+                screen.position.x = state.diDist;
+                updateRays();
+            };
+
+            updateRays();
 
             function animate() {
                 animFrameId = requestAnimationFrame(animate);
                 controls.update();
 
+                flame.scale.x = 0.9 + Math.sin(Date.now() * 0.01) * 0.15;
+                flameInner.scale.x = flame.scale.x;
+
+                const f = state.focalLength;
+                const d_o = state.doDist;
+                let idealDiText = "";
+                let statusText = "";
+
+                if (d_o > f) {
+                    const idealDi = (f * d_o) / (d_o - f);
+                    const focusDiff = Math.abs(state.diDist - idealDi);
+                    const focusFactor = Math.pow(Math.max(0, 1 - focusDiff / 3.8), 1.4);
+                    const focusPercent = Math.round(focusFactor * 100);
+
+                    idealDiText = idealDi.toFixed(1) + " cm";
+                    if (focusPercent >= 90) {
+                        statusText = `🎯 [초점 완전 일치 - 또렷한 도립 실상 (선명도 ${focusPercent}%)]`;
+                    } else if (focusPercent > 0) {
+                        statusText = `🌫️ [초점 이탈 진행 중 - 상이 흐릿함 (선명도 ${focusPercent}%)]`;
+                    } else {
+                        statusText = `⚠️ [초점 완전히 벗어남 - 스크린을 ${state.diDist < idealDi ? '뒤로' : '앞으로'} 이동하세요]`;
+                    }
+                } else if (d_o < f) {
+                    const idealDiVirt = (f * d_o) / (f - d_o);
+                    idealDiText = `-${idealDiVirt.toFixed(1)} cm (렌즈 뒤 허상)`;
+                    statusText = "🔍 [돋보기 효과 - 확대된 초 전체 정립 허상 관찰]";
+                } else {
+                    idealDiText = "무한대 (∞)";
+                    statusText = "⚡ [초점 위치 - 광선 평행 방출, 상 미형성]";
+                }
+
                 liveData.innerHTML = `
-                    <div><b>물체 - 렌즈 거리:</b> ${state.doDist} cm</div>
-                    <div><b>상의 맺힘:</b> ${Math.abs(state.doDist - state.scrPos) < 0.5 ? '🎯 [선명한 도립 실상 형성]' : '초점 조정 필요'}</div>
+                    <div><b>렌즈 방정식:</b> $\\frac{1}{f} = \\frac{1}{d_o} + \\frac{1}{d_i}$ ($f = 4.0\\text{cm}$)</div>
+                    <div><b>물체 거리 ($d_o$):</b> ${d_o.toFixed(1)} cm</div>
+                    <div><b>이론적 결상 위치 ($d_i$):</b> <span class="text-cyan-400 font-bold">${idealDiText}</span></div>
+                    <div><b>상 형성 상태:</b> ${statusText}</div>
                 `;
 
                 renderer.render(scene, camera);
