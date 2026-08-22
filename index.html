@@ -1305,34 +1305,66 @@
             candleGroup.position.set(-8, 3.6, 0);
             scene.add(candleGroup);
 
-            // Projected Inverted Candle on Screen (스크린 실상: 도립된 초 몸통 + 심지 + 불꽃 전체)
-            const projCandleGroup = new THREE.Group();
+            // Projected Inverted Candle on Screen (스크린 실상: 평평한 2D 상 - 스크린의 렌즈쪽 면과 반대쪽 면 모두에 표시)
+            const projBodyMat = new THREE.MeshBasicMaterial({ color: 0xd97706, transparent: true, opacity: 1, side: THREE.DoubleSide });
+            const projWickMat = new THREE.MeshBasicMaterial({ color: 0x0f172a, transparent: true, opacity: 1, side: THREE.DoubleSide });
+            const projFlameMat = new THREE.MeshBasicMaterial({ color: 0xef4444, transparent: true, opacity: 1, side: THREE.DoubleSide });
+            const projFlameInnerMat = new THREE.MeshBasicMaterial({ color: 0xfef08a, transparent: true, opacity: 1, side: THREE.DoubleSide });
 
-            const projBodyMat = new THREE.MeshStandardMaterial({ color: 0xd97706, roughness: 0.5, transparent: true, opacity: 1 });
-            const projWickMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, transparent: true, opacity: 1 });
-            const projFlameMat = new THREE.MeshBasicMaterial({ color: 0xef4444, transparent: true, opacity: 1 });
-            const projFlameInnerMat = new THREE.MeshBasicMaterial({ color: 0xfef08a, transparent: true, opacity: 1 });
+            // Flat flame silhouette shape (teardrop) for a 2D image look
+            function createFlameShapeGeo(width, height) {
+                const shape = new THREE.Shape();
+                shape.moveTo(0, 0);
+                shape.quadraticCurveTo(width / 2, height * 0.4, 0, height);
+                shape.quadraticCurveTo(-width / 2, height * 0.4, 0, 0);
+                const geo = new THREE.ShapeGeometry(shape);
+                geo.translate(0, -height / 2, 0);
+                return geo;
+            }
 
-            const projBody = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 1.8, 24), projBodyMat);
-            projBody.position.y = -0.9;
-            projCandleGroup.add(projBody);
+            const projBodyGeo = new THREE.PlaneGeometry(0.6, 1.8);
+            const projWickGeo = new THREE.PlaneGeometry(0.06, 0.1);
+            const projFlameGeo = createFlameShapeGeo(0.36, 0.55);
+            const projFlameInnerGeo = createFlameShapeGeo(0.18, 0.35);
 
-            const projWick = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.1, 8), projWickMat);
-            projWick.position.y = -1.85;
-            projCandleGroup.add(projWick);
+            // Builds one flat image group (재사용 가능한 지오메트리/재질로 상 하나를 구성)
+            function buildProjCandleImageGroup() {
+                const grp = new THREE.Group();
 
-            const projFlame = new THREE.Mesh(new THREE.ConeGeometry(0.18, 0.55, 16), projFlameMat);
-            projFlame.rotation.z = Math.PI;
-            projFlame.position.y = -2.125;
-            projCandleGroup.add(projFlame);
+                const body = new THREE.Mesh(projBodyGeo, projBodyMat);
+                body.rotation.y = Math.PI / 2;
+                body.position.y = -0.9;
+                grp.add(body);
 
-            const projFlameInner = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.35, 16), projFlameInnerMat);
-            projFlameInner.rotation.z = Math.PI;
-            projFlameInner.position.y = -2.05;
-            projCandleGroup.add(projFlameInner);
+                const wick = new THREE.Mesh(projWickGeo, projWickMat);
+                wick.rotation.y = Math.PI / 2;
+                wick.position.y = -1.85;
+                grp.add(wick);
 
+                const flame = new THREE.Mesh(projFlameGeo, projFlameMat);
+                flame.rotation.y = Math.PI / 2;
+                flame.rotation.z = Math.PI;
+                flame.position.y = -2.125;
+                grp.add(flame);
+
+                const flameInner = new THREE.Mesh(projFlameInnerGeo, projFlameInnerMat);
+                flameInner.rotation.y = Math.PI / 2;
+                flameInner.rotation.z = Math.PI;
+                flameInner.position.y = -2.05;
+                grp.add(flameInner);
+
+                return grp;
+            }
+
+            // 스크린 뒤쪽(관측 기본 방향) 상
+            const projCandleGroup = buildProjCandleImageGroup();
             projCandleGroup.position.set(8.08, 3.6, 0);
             scene.add(projCandleGroup);
+
+            // 스크린 렌즈쪽 면 상 (동일한 상이 스크린 앞면에도 나타나도록)
+            const projCandleGroupLensSide = buildProjCandleImageGroup();
+            projCandleGroupLensSide.position.set(7.92, 3.6, 0);
+            scene.add(projCandleGroupLensSide);
 
             // Virtual Image Candle (허상: 정립 확대 초 전체)
             const virtCandleGroup = new THREE.Group();
@@ -1504,6 +1536,7 @@
                     const maxBlurRange = 3.8;
                     if (focusDiff < maxBlurRange) {
                         projCandleGroup.visible = true;
+                        projCandleGroupLensSide.visible = true;
                         
                         // 초점 일치율 (1.0 = 완전 또렷함, 0.0 = 완전히 흐려짐)
                         const focusFactor = Math.pow(Math.max(0, 1 - focusDiff / maxBlurRange), 1.4);
@@ -1512,6 +1545,8 @@
 
                         projCandleGroup.scale.set(mag * blurSpread, mag * blurSpread, mag * blurSpread);
                         projCandleGroup.position.set(state.diDist + 0.08, yL, 0);
+                        projCandleGroupLensSide.scale.set(mag * blurSpread, mag * blurSpread, mag * blurSpread);
+                        projCandleGroupLensSide.position.set(state.diDist - 0.08, yL, 0);
 
                         // 투명도 조절로 흐림/또렷함 연출
                         projBodyMat.opacity = focusFactor * 0.95;
@@ -1520,10 +1555,12 @@
                         projFlameInnerMat.opacity = focusFactor * 0.98;
                     } else {
                         projCandleGroup.visible = false;
+                        projCandleGroupLensSide.visible = false;
                     }
                 } else if (d_o < f) {
                     // 허상 (Upright Virtual Image)
                     projCandleGroup.visible = false;
+                    projCandleGroupLensSide.visible = false;
                     const d_i_virt = (f * d_o) / (f - d_o);
                     const mag = d_i_virt / d_o;
                     virtCandleGroup.visible = true;
@@ -1532,6 +1569,7 @@
                 } else {
                     // d_o = f (상 미형성)
                     projCandleGroup.visible = false;
+                    projCandleGroupLensSide.visible = false;
                     virtCandleGroup.visible = false;
                 }
             }
